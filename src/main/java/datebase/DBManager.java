@@ -2,15 +2,15 @@ package datebase;
 
 import entity.Discipline;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
     private static Connection con;
+    private static PreparedStatement modifyDiscipline; // переменная статик не может использована в статик блоке
+    //private static PreparedStatement deleteDiscipline;
+
 
     static {
         try{
@@ -18,9 +18,11 @@ public class DBManager {
            // Class.forName("com.mysql.jdbc.Driver");
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+            modifyDiscipline =con.prepareStatement("UPDATE `discipline` SET `discipline` = ? WHERE (`id` = ?);");
         }catch (Exception e){
             e.printStackTrace();
         }
+
     }
 
     public static List<Discipline> getAllActiveDisciplines(){
@@ -68,6 +70,28 @@ public class DBManager {
         }
     }
 
+    public static void modifyDiscipline(String newDiscipline,String id){
+        try{
+            //Statement stm = con.createStatement(); //
+            //stm.execute(""UPDATE `discipline` SET `discipline` = ? WHERE (`id` = ?);"");
+          //  PreparedStatement stm = con.prepareStatement("UPDATE `discipline` SET `discipline` = ? WHERE (`id` = ?);"); // подготовили запрос
+
+            // заменили запрос
+            modifyDiscipline.setString(1,newDiscipline); //первый параметр ?,
+            modifyDiscipline.setString(2,id);
+            modifyDiscipline.execute();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void deleteDisciplines(String ids){
+        try{
+            Statement stm = con.createStatement();
+            stm.execute("UPDATE `discipline` SET `status` = '0' WHERE (`id` in ("+ids+"));");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 }

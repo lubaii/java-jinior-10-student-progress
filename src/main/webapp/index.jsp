@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-sm-2">
                     <a id="logout" class="btn btn-link btn btn-sm" href="">
-                        <%--<button type="button" class="btn btn-outline-secondary btn-sm">--%>Выйти<%--</button>--%>
+                        <%--<button type="button" class="btn btn-outline-secondary btn-sm">--%>Выйди,${user}<%--</button>--%>
                     </a>
                 </div>
             </div>

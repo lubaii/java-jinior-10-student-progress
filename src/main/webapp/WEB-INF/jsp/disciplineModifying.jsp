@@ -14,14 +14,17 @@
         <div id="container">
             <section>
                 <div id="containerForm" class="row">
-                    <form class="needs-validation was-validated">
+                    <form class="needs-validation was-validated" method="post" action="/discipline-modify"><%-- action контролер который задействован   --%>
+                        <input type="hidden" name="idModifyDisc" value="${disc.id}"> <%--доставаться из джавы одну диссциплины, где гетторы и сессторы из класса --%>
+
                         <div id="titleForm" class="form-group row">
                             Для модификации дисциплины заполните все поля и нажмите кнопку "Применить":
                         </div>
                         <div class="form-group row">
                             <label for="name" class="col-sm-2 col-form-label">Название*</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="name" value=" ${disc.discipline}" required>
+                                <input type="text" name="modifyDisc" class="form-control" id="name" value=" ${disc.discipline}" required>
+<%--     вытянуть имя из контроллера                            --%>
                             </div>
                             <div class="valid-tooltip">Хорошо!</div>
                             <div class="invalid-tooltip">Заполните это поле!</div>

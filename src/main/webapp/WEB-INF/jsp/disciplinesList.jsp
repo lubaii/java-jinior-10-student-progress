@@ -67,14 +67,14 @@
                         <div class="divDisciplineList col-sm-12">
                           <a onclick="modyfyDisciplines()">
                                 <button id="button2" type="button" class="btn btn-outline-secondary btn-lg btn-block">
-                                    Модифицировать выбранную дисциплину
+                                    Модифицировать выбранные дисциплины
                                 </button>
                             </a>
                         </div>
                     </div>
                     <div id="divDisciplineList3" class="row">
                         <div class="divDisciplineList col-sm-12">
-                            <a href="#">
+                            <a onclick="deleteDisciplines()">
                                 <button id="button3" type="button" class="btn btn-outline-secondary btn-lg btn-block">
                                     Удалить выбранную дисциплину
                                 </button>
@@ -88,4 +88,7 @@
 </div>
 <form id="formModifingDiscipline" method="get" action="/discipline-modify">
     <input type="hidden" id="idModifyDisc" name="idModifyDisc" value="">
+</form>
+<form id="formDeleteDisciplines" method="post" action="/disciplines">
+    <input type="hidden" id="idsDeleteDiscipline" name="idsDeleteDiscipline" value="">
 </form>
