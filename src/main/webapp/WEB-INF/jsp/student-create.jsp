@@ -1,0 +1,118 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: User
+  Date: 28.03.2020
+  Time: 10:54
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $( function() {
+        $( "#receiptDate" ).datepicker();
+    } );
+</script>
+
+
+<div id="container" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <nav>
+                <div id="divNav" class="row">
+                    <a id="home" href="/" class="btn btn-outline-secondary btn-sm">На главную</a>
+                    <a id="studentsList" href="students" class="btn btn-outline-secondary btn-sm">Назад</a>
+
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-8">
+            <section>
+                <div id="containerForm" class="row">
+                    <form class="needs-validation was-validated" action="student-create" method="post">
+                        <div id="titleForm" class="form-group row">
+                            Для создания студента заполните все поля и нажмите кнопку "Создать":
+                        </div>
+                        <div class="form-group row">
+                            <label for="surnameID" class="col-sm-2 col-form-label">Фамилия*</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="surnameID" name="surname"
+                                       placeholder="Иванов"
+                                       required>
+                            </div>
+                            <div class="valid-tooltip">Хорошо!</div>
+                            <div class="invalid-tooltip">Заполните это поле!</div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="nameId" class="col-sm-2 col-form-label">Имя*</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="nameID" name="name" placeholder="Иван"
+                                       required>
+                            </div>
+                            <div class="valid-tooltip">Хорошо!</div>
+                            <div class="invalid-tooltip">Заполните это поле!</div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="groupID" class="col-sm-2 col-form-label">Группа*</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="groupID" name="group" placeholder="КТ-21"
+                                       required>
+                            </div>
+                            <div class="valid-tooltip">Хорошо!</div>
+                            <div class="invalid-tooltip">Заполните это поле!</div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="receiptDate" class="col-sm-2 col-form-label">Дата поступления*</label>
+
+
+
+                            <div class="col-sm-6">
+                            <c:set var="now" value="<%= new java.util.Date() %>"/>
+                            <input type="text" class="form-control" id="receiptDate2"
+                                   placeholder="<fmt:formatDate type="date" value="${now}" pattern="dd/mm/yyyy"/>">
+                            </div>
+
+
+
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="receiptDate" name="date"
+                                       placeholder="2020-03-05" required>
+                            </div>
+
+                            <%--<div class="col-sm-6">
+                                <input type="text" class="form-control"
+                                       placeholder="2020-03-05">
+                            </div>--%>
+
+                            <div class="valid-tooltip">Хорошо!</div>
+                            <div class="invalid-tooltip">Заполните это поле!</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-outline-secondary btn btn-block">Создать</button>
+                            </div>
+                        </div>
+                        <c:if test="${success == 1}">
+                            <div class="form-group row">
+                                <div class="col-sm-2"></div>
+                                <div id="success" class="col-sm-10">
+                                    Студент "<b>${surname} ${name}</b>" создан
+                                </div>
+                            </div>
+                        </c:if>
+                    </form>
+                </div>
+            </section>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>

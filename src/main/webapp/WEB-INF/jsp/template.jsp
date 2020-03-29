@@ -22,11 +22,13 @@
                 <div id="titleHeader" class="col-sm-8">
                     <h3>Система управления студентами и их успеваемостью</h3>
                 </div>
+                <c:if test="${currentPage ne '/WEB-INF/jsp/login.jsp'}">
                 <div class="col-sm-2">
-                    <a id="logout" class="btn btn-link btn btn-sm" href="">
-                        <%--<button type="button" class="btn btn-outline-secondary btn-sm">--%>Выйди,${user}<%--</button>--%>
+                    <a id="logout" class="btn btn-link btn btn-sm" href="/logout">
+                     Выйди,${user}
                     </a>
                 </div>
+                </c:if>
             </div>
         </div>
     </div>
@@ -44,5 +46,15 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $( function() {
+        $( "#receiptDate" ).datepicker();
+    } );
+</script>
+
 </body>
 </html>

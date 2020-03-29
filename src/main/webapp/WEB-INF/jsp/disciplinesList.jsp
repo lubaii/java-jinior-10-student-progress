@@ -4,7 +4,7 @@
 
 <nav>
     <div id="divNav" class="row">
-        <a id="home" href="index.jsp" class="nav">
+        <a id="home" href="/" class="nav">
             <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
         </a>
         <%-- <a id="studentsList" href="studentsList.jsp" class="nav">
@@ -24,27 +24,35 @@
                 <table id="table" class="table table-bordered table table-hover">
                     <thead>
                     <tr>
+                        <c:if test="${role eq 1}">
                         <th scope="col">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="cbxAll">
                             </div>
                         </th>
+                        </c:if>
                         <th scope="col">Наименование дисциплины</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <c:forEach items="${disces}" var="d" varStatus="i">
+                    <c:forEach items="${disces}" var="d" varStatus="i"> <%-- var текущая дисциплина d - одна дисциплина--%>
+
                         <c:if test="${d.discipline.length() > 0}">
+
                             <tr>
+                        <c:if test="${role eq 1}">
                                 <th scope="row">
                                     <div class="custom-control custom-checkbox">
+
                                         <input type="checkbox" value="${d.id}" class="custom-control-input" id="cbx${i.count}"
                                                required>
                                         <label class="custom-control-label" for="cbx${i.count}"></label>
+
                                     </div>
                                 </th>
-                                <td>${d.discipline}</td>
+                        </c:if>
+                                <td>${d.discipline}</td> <%-- из класса discipline, где есть гетторы и сетторы, чтобы отобразить страницу  --%>
                             </tr>
                         </c:if>
                     </c:forEach>
@@ -52,11 +60,13 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-5">
+          <c:if test="${role eq 1}">
+
+              <div class="col-sm-5">
                 <section>
                     <div id="divDisciplineList1" class="row">
                         <div class="divDisciplineList col-sm-12">
-                            <a href="/discipline-create">
+                            <a href="/discipline-create"> <%-- привязка дейсвтия на ссылку url controllera--%>
                                 <button id="button1" type="button" class="btn btn-outline-secondary btn-lg btn-block">
                                     Создать дисциплину
                                 </button>
@@ -83,6 +93,7 @@
                     </div>
                 </section>
             </div>
+</c:if>
         </div>
     </section>
 </div>

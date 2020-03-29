@@ -22,7 +22,7 @@
                     <h3>Система управления студентами и их успеваемостью</h3>
                 </div>
                 <div class="col-sm-2">
-                    <a id="logout" class="btn btn-link btn btn-sm" href="">
+                    <a id="logout" class="btn btn-link btn btn-sm" href="/logout">
                         <%--<button type="button" class="btn btn-outline-secondary btn-sm">--%>Выйди,${user}<%--</button>--%>
                     </a>
                 </div>

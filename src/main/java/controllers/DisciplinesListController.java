@@ -16,13 +16,13 @@ public class DisciplinesListController extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Discipline> disciplines = DBManager.getAllActiveDisciplines();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { // отображает данные при нажатии на конпку
+        List<Discipline> disciplines = DBManager.getAllActiveDisciplines(); // подключается к базе ланных, достает все дисциплины
 
-        req.setAttribute("disces", disciplines);
+        req.setAttribute("disces", disciplines); //устанавливает атрибуты дициплины
 
-        req.setAttribute("currentPage", "/WEB-INF/jsp/disciplinesList.jsp");
-        req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp);
+        req.setAttribute("currentPage", "/WEB-INF/jsp/disciplinesList.jsp"); //текущая страница, этот пусть отображается в include в tamplate с ${}
+        req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp); //перенаправляетм на template
     }
 
     @Override

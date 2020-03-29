@@ -7,7 +7,7 @@
         <a id="home" href="/" class="nav">
             <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
         </a>
-        <a id="disciplinesList" href="disciplinesList.jsp" class="nav">
+        <a id="disciplinesList" href="/disciplines" class="nav">
             <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
         </a>
     </div>
