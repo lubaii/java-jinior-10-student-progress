@@ -3,7 +3,7 @@
     <nav>
         <div id="navHeader" class="row">
             <div class="col-sm-4">
-                <a href="/studentsList.jsp">
+                <a href="/students">
                     <button type="button" class="btn btn-outline-secondary btn-lg btn-block">Студенты</button>
                 </a>
             </div>
@@ -13,7 +13,7 @@
                 </a>
             </div>
             <div class="col-sm-4">
-                <a href="/termsList.jsp">
+                <a href="/terms-list">
                     <button type="button" class="btn btn-outline-secondary btn-lg btn-block">Семестры</button>
                 </a>
             </div>

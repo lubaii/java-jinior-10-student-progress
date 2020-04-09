@@ -72,13 +72,13 @@
                             <label for="receiptDate" class="col-sm-2 col-form-label">Дата поступления*</label>
 
 
-
-                            <div class="col-sm-6">
-                            <c:set var="now" value="<%= new java.util.Date() %>"/>
-                            <input type="text" class="form-control" id="receiptDate2"
-                                   placeholder="<fmt:formatDate type="date" value="${now}" pattern="dd/mm/yyyy"/>">
-                            </div>
-
+                            <%--
+                                                        <div class="col-sm-6">
+                                                        <c:set var="now" value="<%= new java.util.Date() %>"/>
+                                                        <input type="text" class="form-control" id="receiptDate2"
+                                                               placeholder="<fmt:formatDate type="date" value="${now}" pattern="dd/mm/yyyy"/>">
+                                                        </div>
+                            --%>
 
 
 

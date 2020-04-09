@@ -22,9 +22,10 @@
                 <div id="titleHeader" class="col-sm-8">
                     <h3>Система управления студентами и их успеваемостью</h3>
                 </div>
-                <c:if test="${currentPage ne '/WEB-INF/jsp/login.jsp'}">
+                <c:if test="${currentPage ne '/WEB-INF/jsp/login.jsp'}"><%-- чтобы не отображалась кнопка "выйди" в логине--%>
                 <div class="col-sm-2">
-                    <a id="logout" class="btn btn-link btn btn-sm" href="/logout">
+                    <a id="logout" class="btn btn-link btn btn-sm" href="/logout">   <%--чтобы не отображалась кнопка выдйди--%>
+
                      Выйди,${user}
                     </a>
                 </div>

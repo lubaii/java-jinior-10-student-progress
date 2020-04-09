@@ -33,12 +33,11 @@ public class StudentCreateController  extends HttpServlet {
         try {
             String reformattedStr = myFormat.format(fromUser.parse(date));
            // System.out.println("дата которая записывается в бд " +reformattedStr);
-            DBManager.insertNewStudent(reformattedStr);
+            DBManager.insertNewStudent(surname,name,group,reformattedStr);
         }catch (ParseException e){
             e.printStackTrace();
         }
 
-        //// строчка в бд
 
 
 

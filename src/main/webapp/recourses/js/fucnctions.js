@@ -13,8 +13,8 @@ function modyfyDisciplines() {
     $('#idModifyDisc').val(id);
     $('#formModifingDiscipline').submit();
 
-
 }
+
 function deleteDisciplines() {
     var items = $("input[type=checkbox]:checked");
     if (items.length == 0) {
@@ -30,7 +30,7 @@ function deleteDisciplines() {
         }else{
             ids = ids + "','" + $(items[i]).attr("value");
         }
-        if(i == items.length - 1){
+        if(i == items.length-1){
             ids = ids + "'"
         }
     }
@@ -38,5 +38,19 @@ function deleteDisciplines() {
     $('#idsDeleteDiscipline').val(ids);
     $('#formDeleteDisciplines').submit();
 
+}
+function modyfyStudentes() {
+    var items = $("input[type=checkbox]:checked");
+    if (items.length == 0) {
+        alert("Пожалуйста, выберете студента");
+        return;
+    }
+    if (items.length > 1) {
+        alert("Выберете только одного студента");
+        return;
+    }
+    var id = $(items[0]).attr("value");
 
+    $('#idModifyStuds').val(id);
+    $('#formModiStudent').submit();
 }

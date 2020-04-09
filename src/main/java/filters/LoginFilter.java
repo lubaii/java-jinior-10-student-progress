@@ -18,7 +18,7 @@ public class LoginFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         req.setCharacterEncoding("UTF-8");
 
-        if(req.getRequestURI().endsWith("/login")){
+        if(req.getRequestURI().endsWith("/login")){ // если позователь залогирован, но не переходил к регистрации
             if(req.getSession().getAttribute("isLogin")!=null){
             if(req.getSession().getAttribute("isLogin").equals("1")){ //  1 если залогирован пользователь
                 resp.sendRedirect("/");

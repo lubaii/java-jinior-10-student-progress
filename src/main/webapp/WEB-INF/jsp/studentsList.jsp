@@ -1,17 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <%@ include file="/templates/bootstrap.jsp" %>
-        <link rel="stylesheet" href="styles/templates/header.css">
-        <link rel="stylesheet" href="styles/studentsList.css">
-        <title>Students list</title>
-    </head>
-    <body>
-        <%@ include file="/templates/header" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
+
         <nav>
             <div id="divNav" class="row">
-                <a id="home" href="index.jsp" class="nav">
+                <a id="home" href="/" class="nav">
                     <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
                 </a>
             </div>
@@ -25,23 +18,24 @@
                         </a>
                     </div>
                     <div class="col-sm-6" >
-                        <a href="/studentCreating.jsp">
+                        <a href="/student-create">
                             <button type="button" class="btn btn-outline-secondary btn-lg btn-block">Создать студента</button>
                         </a>
                     </div>
                 </div>
                 <div id="divStudentsList2" class="row">
                     <div class="col-sm-6">
-                        <a href="/studentModifying.jsp">
+                        <a onclick="modyfyStudentes()">
                             <button id="button3" type="button" class="btn btn-outline-secondary btn-lg btn-block">Модифицировать выбранного студента</button>
                         </a>
                     </div>
+
                     <div class="col-sm-6">
                         <a href="/studentsDelete.jsp">
                             <button type="button" class="btn btn-outline-secondary btn-lg btn-block">Удалить выбранных студентов</button>
                         </a>
                     </div>
-                </div>
+                  </div>
             </section>
             <section id="sectionTable">
                 <h5>Список студентов</h5>
@@ -55,7 +49,6 @@
                             </div>
 <%--                            <img src="/icons-1.0.0-alpha2/icons/check-box.svg" alt="" width="20" height="20" title="Checkbox">--%>
                         </th scope="col">
-                        <th scope="col">#</th>
                         <th scope="col">Фамилия</th>
                         <th scope="col">Имя</th>
                         <th scope="col">Группа</th>
@@ -63,114 +56,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cbx1">
-                                <label class="custom-control-label" for="cbx1"></label>
-                            </div>
-                        </th>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>КТ-21</td>
-                        <td>01.06.2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cbx2">
-                                <label class="custom-control-label" for="cbx2"></label>
-                            </div>
-                        </th>
-                        <th scope="row">2</th>
-                        <td>Tom</td>
-                        <td>Thornton</td>
-                        <td>КТ-21</td>
-                        <td>01.06.2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cbx3">
-                                <label class="custom-control-label" for="cbx3"></label>
-                            </div>
-                        </th>
-                        <th scope="row">3</th>
-                        <td>Jacob</td>
-                        <td>Larry</td>
-                        <td>КТ-21</td>
-                        <td>01.06.2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cbx4">
-                                <label class="custom-control-label" for="cbx4"></label>
-                            </div>
-                        </th>
-                        <th scope="row">4</th>
-                        <td>Mikel</td>
-                        <td>Bird</td>
-                        <td>КТ-21</td>
-                        <td>01.06.2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cbx5">
-                                <label class="custom-control-label" for="cbx5"></label>
-                            </div>
-                        </th>
-                        <th scope="row">5</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>КТ-21</td>
-                        <td>01.06.2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cbx6">
-                                <label class="custom-control-label" for="cbx6"></label>
-                            </div>
-                        </th>
-                        <th scope="row">6</th>
-                        <td>Tom</td>
-                        <td>Thornton</td>
-                        <td>КТ-21</td>
-                        <td>01.06.2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cbx7">
-                                <label class="custom-control-label" for="cbx7"></label>
-                            </div>
-                        </th>
-                        <th scope="row">7</th>
-                        <td>Jacob</td>
-                        <td>Larry</td>
-                        <td>КТ-21</td>
-                        <td>01.06.2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cbx8">
-                                <label class="custom-control-label" for="cbx8"></label>
-                            </div>
-                        </th>
-                        <th scope="row">8</th>
-                        <td>Mikel</td>
-                        <td>Bird</td>
-                        <td>КТ-21</td>
-                        <td>01.06.2019</td>
-                    </tr>
-                    </tbody>
-                </table>
+
+                    <c:forEach items="${studs}" var="s" varStatus="i"> <%-- var текущая дисциплина d - одна дисциплина--%>
+
+                        <c:if test="${s.firstname.length() > 0}">
+                            <tr>
+                                <c:if test="${role eq 1}">
+                                    <th scope="row">
+                                        <div class="custom-control custom-checkbox">
+
+                                            <input type="checkbox" value="${s.id}" class="custom-control-input" id="cbx${i.count}"
+                                                   required>
+                                            <label class="custom-control-label" for="cbx${i.count}"></label>
+
+                                        </div>
+                                    </th>
+                                </c:if>
+                                <td>${s.firstname}</td>
+                                <td>${s.lastname}</td>
+                                <td>${s.group}</td>
+                                <td>${s.date}</td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+
             </section>
         </div>
-        <%@ include file="/templates/jQuery.jsp" %>
-    </body>
-</html>
+
+<form id="formModiStudent" method="get" action="/student-modify">
+    <input type="hidden" id="idModifyStuds" name="idModifyStuds" value="">  <%-- hidden - не виден в браузере, id - c джаваскрипта поиск, name- поиск в джаве,  --%>
+</form>

@@ -2,15 +2,20 @@ package datebase;
 
 import entity.Account;
 import entity.Discipline;
+import entity.Student;
+import entity.Term;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DBManager {
     private static Connection con;
     private static PreparedStatement modifyDiscipline; // переменная статик не может использована в статик блоке
     private static PreparedStatement getAccountByLoginPasswordRole;
+    private static PreparedStatement getAllActiveTerm;
+    private static PreparedStatement modifySrudent;
 
 
     static {
@@ -22,6 +27,11 @@ public class DBManager {
             getAccountByLoginPasswordRole = con.prepareStatement("SELECT * FROM user_role\n" +
                     "left join user on user_role.id_user = user.id\n" +
                     "where user.login = ? and user.password = ? and user_role.id_role = ?;");
+            getAllActiveTerm = con.prepareStatement("SELECT * FROM term_discipline as td\n" +
+                    "left join term as t on td.id_term = t.id\n" +
+                    "left join discipline as d on td.id_discipline = d.id\n" +
+                    "where t.status = 1 and d.status = 1 order by td.id_term");
+            modifySrudent = con.prepareStatement("UPDATE `student` SET `first_name` = ?, `last_name` = ?, `group` = ?, `date` = ? WHERE (`id` = ?);");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -116,13 +126,127 @@ public class DBManager {
 
     }
 
-    public static void insertNewStudent(String newStudent){
+   // public static void insertNewStudent(String newStudent){
+    public static void insertNewStudent(String newStudent,String name, String group,String date){
         try{
             Statement stm = con.createStatement();
-            stm.execute("INSERT INTO `student` (`date`) VALUES ('"+newStudent+"');");
+          //  stm.execute("INSERT INTO `student` (`date`) VALUES ('"+newStudent+"');");
+            stm.execute("INSERT INTO `student` (`first_name`, `last_name`, `group`, `date`) VALUES ('"+newStudent+"', '"+name+"', '"+group+"', '"+date+"');");
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+
+    public  static List<Term> getAllActiveTerm(){
+        LinkedList<Term> terms = new LinkedList<Term>();
+        int lastTermId=-1;
+        try{
+            ResultSet rs = getAllActiveTerm.executeQuery();
+            while (rs.next()){
+                if(lastTermId==-1) {
+                    Term term = new Term();
+                    term.setId(rs.getInt("id_term"));
+                    term.setName(rs.getString("name"));
+                    term.setDuration(rs.getString("duration"));
+
+                    Discipline discipline = new Discipline();
+                    discipline.setId(rs.getInt("id_discipline"));
+                    discipline.setDiscipline(rs.getString("discipline"));
+
+                    term.addDiscipline(discipline);
+                    terms.add(term);
+                    lastTermId=rs.getInt("id_term");
+                }
+                else {
+                    int currentTermId = rs.getInt("id_term");
+                    if(currentTermId  == lastTermId){
+                        Discipline discipline = new Discipline();
+                        discipline.setId(rs.getInt("id_discipline"));
+                        discipline.setDiscipline(rs.getString("discioline"));
+
+                        Term lastTerm = terms.removeLast();
+                        lastTerm.addDiscipline(discipline);
+                        terms.add(lastTerm);
+                        lastTermId = rs.getInt("id_term");
+
+                    }
+                    else {
+                        Term term = new Term();
+                        term.setId(rs.getInt("id_term"));
+                        term.setName(rs.getString("name"));
+                        term.setDuration(rs.getString("duration"));
+
+                        Discipline discipline = new Discipline();
+                        discipline.setId(rs.getInt("id_discipline"));
+                        discipline.setDiscipline(rs.getString("discipline"));
+
+                        term.addDiscipline(discipline);
+                        terms.add(term);
+                        lastTermId=rs.getInt("id_term");
+                    }
+                }
+
+            }
+        }catch (Exception e){e.printStackTrace();}
+        return  terms;
+    }
+
+    public static List<Student> getAllActiveStudents() {
+        ArrayList<Student> students = new ArrayList<Student>();
+        try {
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("select * from student WHERE status = 1");
+            while (rs.next()) {
+                Student student = new Student();
+                student.setId(rs.getInt("id"));
+                student.setFirstname(rs.getString("first_name"));
+                student.setLastname(rs.getString("last_name"));
+                student.setGroup(rs.getString("group"));
+                student.setDate(rs.getString("date"));
+                students.add(student);
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
+
+        public static void modifySrudent(String newFirstSt, String newLastSt, String newGroupSt,String id, String newDateSt){
+            try{
+              // modifySrudent = con.prepareStatement("UPDATE `student` SET `first_name` = ?, `last_name` = ?, `group` = ? WHERE (`id` = ?);");
+                // заменили запрос
+                modifySrudent.setString(1,newFirstSt); //первый параметр ?,
+                modifySrudent.setString(2,newLastSt); //первый параметр ?,
+                modifySrudent.setString(3,newGroupSt); //первый параметр ?,
+                modifySrudent.setString(4,newDateSt); //первый параметр ?,
+                modifySrudent.setString(5,id); //первый параметр ?,
+                modifySrudent.execute();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+    public static Student getStudentById(String id){
+        Student student = new Student();
+        try{
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("select * from student WHERE status = 1 AND id = " + id);
+            while (rs.next()){
+                student.setId(rs.getInt("id"));
+                student.setLastname(rs.getString("last_name"));
+                student.setFirstname(rs.getString("first_name"));
+                student.setGroup(rs.getString("group"));
+                student.setDate(rs.getString("date"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return student;
+
+
+    }
+
 
 }

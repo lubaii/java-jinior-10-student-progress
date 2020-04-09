@@ -1,24 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <%@ include file="/templates/bootstrap.jsp"%>
-        <link rel="stylesheet" href="styles/templates/header.css">
-        <link rel="stylesheet" href="styles/termsList.css">
-        <title>Disciplines list</title>
-    </head>
-    <body>
-        <%@ include file="/templates/header" %>
-        <nav>
-            <div id="divNav" class="row">
-                <a id="home" href="index.jsp" class="nav">
-                    <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
-                </a>
-                <a id="studentsList" href="studentsList.jsp" class="nav" hidden>
-                    <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
-                </a>
-            </div>
-        </nav>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
+
+
         <div id="container">
             <section>
                 <div id="titleTermsList" class="row">
@@ -30,10 +14,18 @@
                                 <div class="form-group col-sm-3">
                                     <select type="text" id="select" class="form-control">
                                         <option selected>Семестр 1</option>
-                                        <option>Семестр 2</option>
-                                        <option>Семестр 3</option>
-                                        <option>Семестр 4</option>
-                                        <option>Семестр 5</option>
+                                        <c:forEach items="${terms}" var="t">
+                                            <c:choose>
+                                                <c:when test="${t.id eq selectedTerm.id}">
+                                                    <option selected>${t.name}</option>
+                                                    <br/>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option>${t.name}</option>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                        </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-3">
@@ -41,7 +33,7 @@
                                 </div>
                             </div>
                             <div id="divDurationTerm" class="row">
-                                <h5><div class="col-sm-12">Длительность семестра: <b> 4.8 </b>недели.</div></h5>
+                                <h5><div class="col-sm-12">Длительность семестра <b> ${selectedTerm.duration} </b></div></h5>
                             </div>
                         </div>
                     </div>
@@ -57,23 +49,13 @@
                             </tr>
                             </thead>
                             <tbody>
+
+                            <c:forEach items="${selectedTerm.disciplines}" var="d">
                             <tr>
-                                <td>Информатика</td>
+                                <td>${d.discipline}</td>
                             </tr>
-                            <tr>
-                                <td>Системный анализ</td>
-                            </tr>
-                            <tr>
-                                <td>Управление проектами</td>
-                            </tr>
-                            <tr>
-                                <td>Основы Дискретной Математики</td>
-                            </tr> <tr>
-                                <td>Высшая математика</td>
-                            </tr>
-                            <tr>
-                                <td>История Науки и Техники</td>
-                            </tr>
+                            </c:forEach>
+
                             </tbody>
                         </table>
                     </div>
@@ -105,6 +87,3 @@
                 </div>
             </section>
         </div>
-        <%@ include file="/templates/jQuery.jsp"%>
-    </body>
-</html>

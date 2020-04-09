@@ -27,10 +27,10 @@ public class LoginController extends HttpServlet {
 
         boolean access = DBManager.getAccountByLoginPasswordRole (login,password,role);
           if(access){
-              req.getSession().setAttribute("isLogin","1");
-              req.getSession().setAttribute("role",role);
+              req.getSession().setAttribute("isLogin","1"); // islogin  неизвестно кто
+              req.getSession().setAttribute("role",role); // администратор, учитель...
               req.getSession().setAttribute("user",login);
-              resp.sendRedirect("/");
+              resp.sendRedirect("/"); // выйти на общую страницу
 
           }
           else{

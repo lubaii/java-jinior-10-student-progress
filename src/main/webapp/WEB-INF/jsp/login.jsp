@@ -10,6 +10,7 @@
                     <a id="home" href="/" class="btn btn-outline-secondary btn-sm">На главную</a>
                 </div>
             </nav>--%>
+            <%-- убрана кнопка на главную, чтобы не отображалась--%>
         </div>
         <div class="col-md-8">
             <section>

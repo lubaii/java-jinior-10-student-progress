@@ -3,10 +3,10 @@
 <%@ page isELIgnored="false" %>
         <nav>
             <div id="divNav" class="row">
-                <a id="home" href="index.jsp" class="nav">
+                <a id="home" href="/" class="nav">
                     <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
                 </a>
-                <a id="disciplinesList" href="disciplinesList.jsp" class="nav">
+                <a id="disciplinesList" href="/disciplines" class="nav">
                     <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
                 </a>
             </div>
@@ -24,7 +24,7 @@
                             <label for="name" class="col-sm-2 col-form-label">Название*</label>
                             <div class="col-sm-8">
                                 <input type="text" name="modifyDisc" class="form-control" id="name" value=" ${disc.discipline}" required>
-<%--     вытянуть имя из контроллера                            --%>
+<%--     вытянуть имя из контроллер/   disc.discipline - автоматически заполняется поле                          --%>
                             </div>
                             <div class="valid-tooltip">Хорошо!</div>
                             <div class="invalid-tooltip">Заполните это поле!</div>

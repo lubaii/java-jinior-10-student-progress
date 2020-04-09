@@ -37,7 +37,6 @@
                     <tbody>
 
                     <c:forEach items="${disces}" var="d" varStatus="i"> <%-- var текущая дисциплина d - одна дисциплина--%>
-
                         <c:if test="${d.discipline.length() > 0}">
 
                             <tr>
@@ -77,7 +76,7 @@
                         <div class="divDisciplineList col-sm-12">
                           <a onclick="modyfyDisciplines()">
                                 <button id="button2" type="button" class="btn btn-outline-secondary btn-lg btn-block">
-                                    Модифицировать выбранные дисциплины
+                                    Модифицировать выбранную дисциплину
                                 </button>
                             </a>
                         </div>
@@ -86,19 +85,19 @@
                         <div class="divDisciplineList col-sm-12">
                             <a onclick="deleteDisciplines()">
                                 <button id="button3" type="button" class="btn btn-outline-secondary btn-lg btn-block">
-                                    Удалить выбранную дисциплину
+                                    Удалить выбранные дисциплины
                                 </button>
                             </a>
                         </div>
                     </div>
                 </section>
             </div>
-</c:if>
+           </c:if>
         </div>
     </section>
 </div>
 <form id="formModifingDiscipline" method="get" action="/discipline-modify">
-    <input type="hidden" id="idModifyDisc" name="idModifyDisc" value="">
+    <input type="hidden" id="idModifyDisc" name="idModifyDisc" value="">  <%-- hidden - не виден в браузере, id - c джаваскрипта поиск, name- поиск в джаве,  --%>
 </form>
 <form id="formDeleteDisciplines" method="post" action="/disciplines">
     <input type="hidden" id="idsDeleteDiscipline" name="idsDeleteDiscipline" value="">
