@@ -52,9 +52,16 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-    $( function() {
-        $( "#receiptDate" ).datepicker();
-    } );
+$(function () {
+
+$("#receiptDate").datepicker(
+{
+dateFormat: "dd/mm/yy"
+
+}
+
+).val();
+});
 </script>
 
 </body>

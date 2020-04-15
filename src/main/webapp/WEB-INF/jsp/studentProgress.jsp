@@ -1,17 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <%@ include file="/templates/bootstrap.jsp" %>
-        <link rel="stylesheet" href="styles/templates/header.css">
-        <link rel="stylesheet" href="styles/studentProgress.css">
-        <title>Students progress</title>
-    </head>
-    <body>
-        <%@ include file="/templates/header" %>
-        <nav>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
             <div id="divNav" class="row">
-                <a id="home" href="index.jsp" class="nav">
+                <a id="home" href="/" class="nav">
                     <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
                 </a>
                 <a id="studentsList" href="studentsList.jsp" class="nav">
@@ -105,6 +97,4 @@
                 </div>
             </section>
         </div>
-        <%@ include file="/templates/jQuery.jsp" %>
-    </body>
-</html>
+

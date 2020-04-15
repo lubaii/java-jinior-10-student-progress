@@ -25,6 +25,12 @@ public class StudentsListController extends HttpServlet {
         req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    String ids = req.getParameter("idsDeleteStudent");
+        DBManager.deleteStudents(ids);
+        resp.sendRedirect("/students");
 
+    }
 }
 

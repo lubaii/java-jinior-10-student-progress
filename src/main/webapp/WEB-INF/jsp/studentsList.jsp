@@ -2,6 +2,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="ftm" uri="http://java.sun.com/jstl/fmt" %>
+<%--<%@ taglib prefix="ftm" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ftm" uri="http://java.sun.com/jsp/jstl/xml" %>--%>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $( function() {
+        $( "#receiptDate" ).datepicker();
+    } );
+</script>
+
         <nav>
             <div id="divNav" class="row">
                 <a id="home" href="/" class="nav">
@@ -31,7 +46,7 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <a href="/studentsDelete.jsp">
+                        <a onclick="deleteStudents()">
                             <button type="button" class="btn btn-outline-secondary btn-lg btn-block">Удалить выбранных студентов</button>
                         </a>
                     </div>
@@ -75,7 +90,17 @@
                                 <td>${s.firstname}</td>
                                 <td>${s.lastname}</td>
                                 <td>${s.group}</td>
-                                <td>${s.date}</td>
+                                <%--<td>${s.date}</td>--%>
+                                <fmt:parseDate value="${s.date}" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                <fmt:formatDate value="${date}" var="dateP" pattern="dd/MM/yyyy" />
+
+                                       <td>${dateP}
+
+
+                                       <%--
+                                           <ftm: parseDate value="${s.date}" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                           <ftm: formatDate value="${date}" var="dateP" pattern="dd/MM/yyyy"/>--%>
+                                </td>
                             </tr>
                         </c:if>
                     </c:forEach>
@@ -85,4 +110,7 @@
 
 <form id="formModiStudent" method="get" action="/student-modify">
     <input type="hidden" id="idModifyStuds" name="idModifyStuds" value="">  <%-- hidden - не виден в браузере, id - c джаваскрипта поиск, name- поиск в джаве,  --%>
+</form>
+<form id="formDeleteStudents" method="post" action="/students">
+    <input type="hidden" id="idsDeleteStudent" name="idsDeleteStudent" value="">
 </form>

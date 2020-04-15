@@ -22,6 +22,7 @@ public class DBManager {
         try{
 
             Class.forName("com.mysql.cj.jdbc.Driver");
+            //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
             modifyDiscipline =con.prepareStatement("UPDATE `discipline` SET `discipline` = ? WHERE (`id` = ?);");
             getAccountByLoginPasswordRole = con.prepareStatement("SELECT * FROM user_role\n" +
@@ -162,7 +163,7 @@ public class DBManager {
                     if(currentTermId  == lastTermId){
                         Discipline discipline = new Discipline();
                         discipline.setId(rs.getInt("id_discipline"));
-                        discipline.setDiscipline(rs.getString("discioline"));
+                        discipline.setDiscipline(rs.getString("discipline"));
 
                         Term lastTerm = terms.removeLast();
                         lastTerm.addDiscipline(discipline);
@@ -213,7 +214,7 @@ public class DBManager {
         return students;
     }
 
-        public static void modifySrudent(String newFirstSt, String newLastSt, String newGroupSt,String id, String newDateSt){
+        public static void modifySrudent(String newFirstSt, String newLastSt, String newGroupSt, String newDateSt, String id){
             try{
               // modifySrudent = con.prepareStatement("UPDATE `student` SET `first_name` = ?, `last_name` = ?, `group` = ? WHERE (`id` = ?);");
                 // заменили запрос
@@ -246,6 +247,15 @@ public class DBManager {
         return student;
 
 
+    }
+
+    public static void deleteStudents(String ids){
+        try{
+            Statement stm = con.createStatement();
+            stm.execute("UPDATE `student` SET `status` = '0' WHERE (`id` in ("+ids+"));");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

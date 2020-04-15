@@ -1,14 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <%@ include file="/templates/bootstrap.jsp"%>
-        <link rel="stylesheet" href="styles/templates/header.css">
-        <link rel="stylesheet" href="styles/termCreatingAndModifying.css">
-        <title>Student creating</title>
-    </head>
-    <body>
-        <%@ include file="/templates/header" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
         <nav>
             <div id="divNav" class="row">
                 <a id="home" href="index.jsp" class="nav">

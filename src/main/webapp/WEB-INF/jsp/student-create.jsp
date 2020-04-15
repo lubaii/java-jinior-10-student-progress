@@ -14,13 +14,13 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<%--
 <script>
     $( function() {
         $( "#receiptDate" ).datepicker();
     } );
 </script>
-
+--%>
 
 <div id="container" class="container-fluid">
     <div class="row">
@@ -69,7 +69,18 @@
                             <div class="invalid-tooltip">Заполните это поле!</div>
                         </div>
                         <div class="form-group row">
-                            <label for="receiptDate" class="col-sm-2 col-form-label">Дата поступления*</label>
+
+
+
+<%--
+                                <label for="datepicker" class="col-sm-2 col-form-label">Дата поступления*</label>
+                                                       <div class="col-sm-6">
+                                                       <c:set var="date" value="<%= new java.util.Date() %>" />
+                                                       <input type="text" class="form-control"
+                                                              value="<fmt:formatDate type="date" value="${date}" pattern="dd/mm/yyyy"/>"
+                                                       type="text" placeholder="" autocomplete="off" id ="datepicker" required  >
+                                                       </div>--%>
+
 
 
                             <%--
@@ -78,20 +89,23 @@
                                                         <input type="text" class="form-control" id="receiptDate2"
                                                                placeholder="<fmt:formatDate type="date" value="${now}" pattern="dd/mm/yyyy"/>">
                                                         </div>
-                            --%>
 
 
+<--%>
+                                                 <label for="receiptDate" class="col-sm-2 col-form-label">Дата поступления*</label>
 
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="receiptDate" name="date"
-                                       placeholder="2020-03-05" required>
-                            </div>
+               <div class="col-sm-6">
+<input type="text" class="form-control" id="receiptDate" name="date"
+     placeholder="2020-03-05" required>
+</div>
 
-                            <%--<div class="col-sm-6">
-                                <input type="text" class="form-control"
-                                       placeholder="2020-03-05">
-                            </div>--%>
-
+<%--
+    <div class="col-sm-6">
+        <c:set var="now" value="<%= new java.util.Date() %>"/>
+        <input type="text" class="form-control" id="receiptDate" name="date"
+               placeholder="<fmt:formatDate type = "both"   value="${now}" pattern="dd/mm/yyyy"/>">
+    </div>
+    --%>
                             <div class="valid-tooltip">Хорошо!</div>
                             <div class="invalid-tooltip">Заполните это поле!</div>
                         </div>
