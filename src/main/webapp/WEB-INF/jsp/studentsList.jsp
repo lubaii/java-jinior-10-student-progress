@@ -28,7 +28,9 @@
             <section>
                 <div id="divStudentsList1" class="row">
                     <div class="col-sm-6">
-                        <a href="/studentProgress.jsp">
+<%--
+                        <a href="/student-progress">
+--%>                            <a onclick="progressStudentes()">
                             <button id="button1" type="button" class="btn btn-outline-secondary btn-lg btn-block">Посмотреть успеваемость выбранного студента</button>
                         </a>
                     </div>
@@ -70,7 +72,8 @@
                         <th scope="col">Дата поступления</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <%--
+                    <tbody>--%>
 
                     <c:forEach items="${studs}" var="s" varStatus="i"> <%-- var текущая дисциплина d - одна дисциплина--%>
 
@@ -90,7 +93,6 @@
                                 <td>${s.firstname}</td>
                                 <td>${s.lastname}</td>
                                 <td>${s.group}</td>
-                                <%--<td>${s.date}</td>--%>
                                 <fmt:parseDate value="${s.date}" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 <fmt:formatDate value="${date}" var="dateP" pattern="dd/MM/yyyy" />
 
@@ -113,4 +115,7 @@
 </form>
 <form id="formDeleteStudents" method="post" action="/students">
     <input type="hidden" id="idsDeleteStudent" name="idsDeleteStudent" value="">
+</form>
+<form id="formProStudent" method="get" action="/student-progress">
+    <input type="hidden" id="idProgressStuds" name="idProgressStuds" value="">
 </form>

@@ -79,3 +79,18 @@ function deleteStudents() {
     $('#formDeleteStudents').submit();
 
 }
+function progressStudentes() {
+    var items = $("input[type=checkbox]:checked");
+    if (items.length == 0) {
+        alert("Пожалуйста, выберете студента");
+        return;
+    }
+    if (items.length > 1) {
+        alert("Выберете только одного студента");
+        return;
+    }
+    var id = $(items[0]).attr("value");
+
+    $('#idProgressStuds').val(id);
+   $('#formProStudent').submit();
+}

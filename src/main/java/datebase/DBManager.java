@@ -1,9 +1,6 @@
 package datebase;
 
-import entity.Account;
-import entity.Discipline;
-import entity.Student;
-import entity.Term;
+import entity.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ public class DBManager {
     private static PreparedStatement getAccountByLoginPasswordRole;
     private static PreparedStatement getAllActiveTerm;
     private static PreparedStatement modifySrudent;
+    private static PreparedStatement getAllActiveTermStud;
 
 
     static {
@@ -33,6 +31,12 @@ public class DBManager {
                     "left join discipline as d on td.id_discipline = d.id\n" +
                     "where t.status = 1 and d.status = 1 order by td.id_term");
             modifySrudent = con.prepareStatement("UPDATE `student` SET `first_name` = ?, `last_name` = ?, `group` = ?, `date` = ? WHERE (`id` = ?);");
+            getAllActiveTermStud = con.prepareStatement("SELECT * FROM student_crm.mark\n" +
+                    "left join student on mark.id_student=student.id\n" +
+                    "left join term_discipline on mark.id_term_discipline=term_discipline.id\n" +
+                    "left join term on term_discipline.id_term=term.id\n" +
+                    "left join discipline on term_discipline.id_discipline = discipline.id\n" +
+                    "where discipline.status=1 and term.status=1;");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -256,6 +260,77 @@ public class DBManager {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public  static List<Term> getAllActiveTermStud(){
+        LinkedList<Term> terms = new LinkedList<Term>();
+        int lastTermId=-1;
+        try{
+            ResultSet rs = getAllActiveTermStud.executeQuery();
+            while (rs.next()){
+                if(lastTermId==-1) {
+                    Term term = new Term();
+                    term.setId(rs.getInt("id_term"));
+                    term.setName(rs.getString("name"));
+                    term.setDuration(rs.getString("duration"));
+
+                    Discipline discipline = new Discipline();
+                    discipline.setId(rs.getInt("id_discipline"));
+                    discipline.setDiscipline(rs.getString("discipline"));
+
+                    Mark mark = new Mark();
+                    mark.setId(rs.getInt("id"));
+                    mark.setGraduate(rs.getString("graduate"));
+
+                    term.addDiscipline(discipline);
+                    term.addMark(mark);
+                    terms.add(term);
+
+                    lastTermId=rs.getInt("id_term");
+                }
+                else {
+                    int currentTermId = rs.getInt("id_term");
+                    if(currentTermId  == lastTermId){
+
+                        Discipline discipline = new Discipline();
+                        discipline.setId(rs.getInt("id_discipline"));
+                        discipline.setDiscipline(rs.getString("discipline"));
+
+                        Mark mark = new Mark();
+                        mark.setId(rs.getInt("id"));
+                        mark.setGraduate(rs.getString("graduate"));
+
+                        Term lastTerm = terms.removeLast();
+                        lastTerm.addDiscipline(discipline);
+                        lastTerm.addMark(mark);
+                        terms.add(lastTerm);
+                        lastTermId = rs.getInt("id_term");
+
+                    }
+                    else {
+                        Term term = new Term();
+                        term.setId(rs.getInt("id_term"));
+                        term.setName(rs.getString("name"));
+                        term.setDuration(rs.getString("duration"));
+
+                        Discipline discipline = new Discipline();
+                        discipline.setId(rs.getInt("id_discipline"));
+                        discipline.setDiscipline(rs.getString("discipline"));
+
+                        Mark mark = new Mark();
+                        mark.setId(rs.getInt("id"));
+                        mark.setGraduate(rs.getString("graduate"));
+
+                        term.addDiscipline(discipline);
+                        term.addMark(mark);
+                        terms.add(term);
+                        lastTermId=rs.getInt("id_term");
+                    }
+                }
+
+            }
+        }catch (Exception e){e.printStackTrace();}
+        return  terms;
     }
 
 
