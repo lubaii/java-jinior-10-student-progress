@@ -108,4 +108,8 @@ public class Student {
                 ", status=" + status +
                 '}';
     }
+
+    public void add(Student student) {
+
+    }
 }

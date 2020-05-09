@@ -14,6 +14,7 @@ public class DBManager {
     private static PreparedStatement getAllActiveTerm;
     private static PreparedStatement modifySrudent;
     private static PreparedStatement getAllActiveTermStud;
+    private static PreparedStatement getAllActiveMarkStud;
 
 
     static {
@@ -36,7 +37,12 @@ public class DBManager {
                     "left join term_discipline on mark.id_term_discipline=term_discipline.id\n" +
                     "left join term on term_discipline.id_term=term.id\n" +
                     "left join discipline on term_discipline.id_discipline = discipline.id\n" +
-                    "where discipline.status=1 and term.status=1;");
+                    "where discipline.status=1 and term.status=1 order by mark.id;");
+            getAllActiveMarkStud = con.prepareStatement("SELECT mark.*,discipline.id l2,discipline.discipline,discipline.status,student.*,term.* from student_crm.mark \n" +
+                    "left join discipline on mark.id=discipline.id \n" +
+                    "left join student on mark.id_student=student.id \n" +
+                    "left join term on mark.id_term_discipline = term.id\n" +
+                    "where  term.status=1 and student.status=1 order by term.id; ");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -90,6 +96,30 @@ public class DBManager {
         }
     }
 
+    public static void insertNewDisciplineandTerm(int term, List<Integer> disciplines){
+        int i = disciplines.size();
+        while (i>0){
+            for(Integer s : disciplines){
+                try{
+                    Statement stm = con.createStatement();
+                    stm.execute("INSERT INTO `term_discipline` (`id_term`, `id_discipline`) VALUES ('"+term+"', '"+s+"');");
+                    //  INSERT INTO `student_crm`.`term_discipline` (`id_term`, `id_discipline`) VALUES ('3', '4');
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                i--;
+            }
+
+        }
+        /*try{
+            Statement stm = con.createStatement();
+            stm.execute("INSERT INTO `term_discipline` (`id_term`, `id_discipline`) VALUES ('"+term+"', '"+disciplines+"');");
+          //  INSERT INTO `student_crm`.`term_discipline` (`id_term`, `id_discipline`) VALUES ('3', '4');
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+    }
+
     public static void modifyDiscipline(String newDiscipline,String id){
         try{
             //Statement stm = con.createStatement(); //
@@ -112,6 +142,8 @@ public class DBManager {
             e.printStackTrace();
         }
     }
+
+
 
 
     public static boolean getAccountByLoginPasswordRole (String login,String password,String role){
@@ -280,8 +312,13 @@ public class DBManager {
 
                     Mark mark = new Mark();
                     mark.setId(rs.getInt("id"));
+                    mark.setId_term_discipline(rs.getInt("id_term_discipline"));
                     mark.setGraduate(rs.getString("graduate"));
 
+                    Student student = new Student();
+                    student.setId(rs.getInt("id"));
+
+                    term.addStudent(student);
                     term.addDiscipline(discipline);
                     term.addMark(mark);
                     terms.add(term);
@@ -298,9 +335,14 @@ public class DBManager {
 
                         Mark mark = new Mark();
                         mark.setId(rs.getInt("id"));
+                        mark.setId_term_discipline(rs.getInt("id_term_discipline"));
                         mark.setGraduate(rs.getString("graduate"));
 
+                        Student student = new Student();
+                        student.setId(rs.getInt("id"));
+
                         Term lastTerm = terms.removeLast();
+                        lastTerm.addStudent(student);
                         lastTerm.addDiscipline(discipline);
                         lastTerm.addMark(mark);
                         terms.add(lastTerm);
@@ -319,8 +361,13 @@ public class DBManager {
 
                         Mark mark = new Mark();
                         mark.setId(rs.getInt("id"));
+                        mark.setId_term_discipline(rs.getInt("id_term_discipline"));
                         mark.setGraduate(rs.getString("graduate"));
 
+                        Student student = new Student();
+                        student.setId(rs.getInt("id"));
+
+                        term.addStudent(student);
                         term.addDiscipline(discipline);
                         term.addMark(mark);
                         terms.add(term);
@@ -332,6 +379,92 @@ public class DBManager {
         }catch (Exception e){e.printStackTrace();}
         return  terms;
     }
+
+    public static List<Mark> getAllActiveMarkStud(){
+        LinkedList<Mark> marks = new LinkedList<Mark>();
+        int lastTermId=-1;
+        try {
+
+            ResultSet rs = getAllActiveMarkStud.executeQuery();
+            while (rs.next()){
+                if(lastTermId==-1) {
+                    Mark mark = new Mark();
+                    mark.setId(rs.getInt("id"));
+                    mark.setId_term_discipline(rs.getInt("id_term_discipline"));
+                    mark.setGraduate(rs.getString("graduate"));
+
+                    Discipline discipline = new Discipline();
+                    discipline.setId(rs.getInt("l2"));
+                    discipline.setDiscipline(rs.getString("discipline"));
+
+                    Student student = new Student();
+                    student.setId(rs.getInt("id"));
+
+                    Term term = new Term();
+                    term.setId(rs.getInt("id_term_discipline"));
+                    term.setName(rs.getString("name"));
+                    term.setDuration(rs.getString("duration"));
+
+                    mark.addStudent(student);
+                    mark.addDiscipline(discipline);
+                    mark.addTerm(term);
+                    marks.add(mark);
+
+                    lastTermId=rs.getInt("id_term_discipline");
+                }
+                else{
+                    int currentTermId = rs.getInt("id_term_discipline");
+                    if(currentTermId  == lastTermId){
+                        Mark mark = new Mark();
+                        mark.setId(rs.getInt("id"));
+                        mark.setId_term_discipline(rs.getInt("id_term_discipline"));
+                        mark.setGraduate(rs.getString("graduate"));
+
+                        Discipline discipline = new Discipline();
+                        discipline.setId(rs.getInt("l2"));
+                        discipline.setDiscipline(rs.getString("discipline"));
+
+                        mark.addDiscipline(discipline);
+                        marks.add(mark);
+                        lastTermId = rs.getInt("id_term_discipline");
+
+
+                    }
+                    else {
+                        Mark mark = new Mark();
+                        mark.setId(rs.getInt("id"));
+                        mark.setId_term_discipline(rs.getInt("id_term_discipline"));
+                        mark.setGraduate(rs.getString("graduate"));
+
+                        Discipline discipline = new Discipline();
+                        discipline.setId(rs.getInt("l2"));
+                        discipline.setDiscipline(rs.getString("discipline"));
+
+                        Student student = new Student();
+                        student.setId(rs.getInt("id"));
+
+                        Term term = new Term();
+                        term.setId(rs.getInt("id_term_discipline"));
+                        term.setName(rs.getString("name"));
+                        term.setDuration(rs.getString("duration"));
+
+                        mark.addStudent(student);
+                        mark.addDiscipline(discipline);
+                        mark.addTerm(term);
+                        marks.add(mark);
+
+                        lastTermId=rs.getInt("id_term_discipline");
+                    }
+                }
+
+
+
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return marks;
+    }
+
 
 
 }

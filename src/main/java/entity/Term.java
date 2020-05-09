@@ -9,16 +9,18 @@ public class Term {
     private String duration;
     private LinkedList<Discipline> disciplines= new LinkedList<Discipline>();
     private LinkedList<Mark> marks = new LinkedList<Mark>();
+    private LinkedList<Student> students = new LinkedList<Student>();
 
     public Term() {
     }
 
-    public Term(int id, String name, String duration, LinkedList<Discipline> disciplines, LinkedList<Mark> marks) {
+    public Term(int id, String name, String duration, LinkedList<Discipline> disciplines, LinkedList<Mark> marks, LinkedList<Student> students, Student stud) {
         this.id = id;
         this.name = name;
         this.duration = duration;
         this.disciplines = disciplines;
         this.marks = marks;
+        this.students = students;
     }
 
     public int getId() {
@@ -60,13 +62,34 @@ public class Term {
     public void setMarks(LinkedList<Mark> marks) {
         this.marks = marks;
     }
-     public void addDiscipline(Discipline discipline){
+
+    public LinkedList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(LinkedList<Student> students) {
+        this.students = students;
+    }
+
+//    public Student getStud() {
+//        return stud;
+//    }
+//
+//    public void setStud(Student stud) {
+//        this.stud = stud;
+//    }
+
+    public void addDiscipline(Discipline discipline){
         disciplines.add(discipline);
     }
 
-     public void addMark(Mark mark){
+    public void addMark(Mark mark){
         marks.add(mark);
     }
+
+    public void addStudent(Student student) { students.add(student); }
+   // public Student addStudent(Student student) { return student; }
+
 
     @Override
     public boolean equals(Object o) {
@@ -81,7 +104,9 @@ public class Term {
             return false;
         if (getDisciplines() != null ? !getDisciplines().equals(term.getDisciplines()) : term.getDisciplines() != null)
             return false;
-        return getMarks() != null ? getMarks().equals(term.getMarks()) : term.getMarks() == null;
+        if (getMarks() != null ? !getMarks().equals(term.getMarks()) : term.getMarks() != null) return false;
+        return getStudents() != null ? getStudents().equals(term.getStudents()) : term.getStudents() == null;
+
     }
 
     @Override
@@ -91,6 +116,8 @@ public class Term {
         result = 31 * result + (getDuration() != null ? getDuration().hashCode() : 0);
         result = 31 * result + (getDisciplines() != null ? getDisciplines().hashCode() : 0);
         result = 31 * result + (getMarks() != null ? getMarks().hashCode() : 0);
+        result = 31 * result + (getStudents() != null ? getStudents().hashCode() : 0);
+      //  result = 31 * result + (getStud() != null ? getStud().hashCode() : 0);
         return result;
     }
 
@@ -102,6 +129,8 @@ public class Term {
                 ", duration='" + duration + '\'' +
                 ", disciplines=" + disciplines +
                 ", marks=" + marks +
+                ", students=" + students +
+            //    ", stud=" + stud +
                 '}';
     }
     /*public Term(LinkedList<Discipline> disciplines) {

@@ -28,9 +28,9 @@ public class DisciplinesListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String ids = req.getParameter("idsDeleteDiscipline");
-        if(ids.contains("'undefined'")){
+      /*  if(ids.contains("'undefined'")){
             ids =ids.replace(",'undefined'","");
-        }
+        }*/
         System.out.println(ids);
         DBManager.deleteDisciplines(ids);
         resp.sendRedirect("/disciplines");

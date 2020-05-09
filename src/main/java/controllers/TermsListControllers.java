@@ -15,20 +15,22 @@ import java.util.List;
 public class TermsListControllers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Term> terms = DBManager.getAllActiveTerm();
-        req.setAttribute("terms",terms); // отобржение семестров в selecte
         String selTerm = req.getParameter("selTerm");
-        if(selTerm!=null){
-            for(Term t :terms){
-                String q = t.getId()+"";
-                if(selTerm.equals(q)){
-                    req.setAttribute("selectedTerm",t);
-                } else {
-                    req.setAttribute("selectedTerm",terms.get(0));
+        List<Term> terms = DBManager.getAllActiveTerm();
+        req.setAttribute("terms",terms);
+        if(selTerm!=null) {
+            for (Term t : terms) {
+                String cur = t.getId() + "";
+                if (cur.equals(selTerm)) {
+                    req.setAttribute("selectedTerm", t);
                 }
-
             }
         }
+        else
+        {
+            req.setAttribute("selectedTerm",terms.get(0));
+        }
+
         req.setAttribute("currentPage", "/WEB-INF/jsp/termsList.jsp");
         req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp);
 

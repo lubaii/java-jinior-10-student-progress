@@ -17,6 +17,7 @@
             </div>
         </nav>
         <div id="container">
+            <form action="/student-progress">
             <section >
                 <div id="titleStudentProgress" class="row">
                     <h4>Отображена успеваемость для следущего студента:</h4>
@@ -24,7 +25,7 @@
             </section>
             <section id="sectionTable">
                 <h5>Список студентов</h5>
-         <form action="/student-progress">
+         <%--<form action="/student-progress">--%>
              <input type="hidden" name="idProgressStuds" value="${stuD.id}" varstatus="status">
 
              <table id="table" class="table table-bordered table table-hover">
@@ -47,7 +48,7 @@
                         </tr>
                     </tbody>
                 </table>
-                </form>
+               <%-- </form>--%>
 
             </section>
 
@@ -62,34 +63,21 @@
                             </tr>
                             </thead>
                             <tbody>
-                         <c:forEach items="${selectedTerm.disciplines}" var="d">
-                             <c:forEach items="${selectedTerm.mark}" var="m">
+                         <c:forEach items="${dis.disciplines}" var="d">
+                             <c:forEach items="${dis.mark}" var="m">
                             <tr>
                                 <td>${d.discipline}</td>
                                 <td class="tdTable2">${m.mark}</td>
                             </tr>
-                                 <%--
-                            <tr>
-                                <td>Системный анализ</td>
-                                <td class="tdTable2">5</td>
-                            </tr>
-                            <tr>
-                                <td>Управление проектами</td>
-                                <td class="tdTable2">4</td>
-                            </tr>
-                            <tr>
-                                <td>Основы Дискретной Математики</td>
-                                <td class="tdTable2">4</td>
-                            </tr>--%>
                              </c:forEach>
                          </c:forEach>
                             </tbody>
                         </table>
                     </div>
-<%--
-                    <form action="/student-progress">
---%>
 
+                    <%--<form method="post" action="/student-progress">
+                        <input type="hidden" name="idProgressStuds" value="${stuD.id}" varstatus="status">
+                    --%>
                     <div class="col-sm-6">
                         <div class="form">
                             <div class="form-row">
@@ -98,8 +86,7 @@
                                 </div>
                                 <div class="form-group col-sm-4">
                                     <select type="text" id="select" class="form-control" name="selTerm">
-                                        <%--
-                                        <option selected>Семестр 1</option>--%>
+
                                         <c:forEach items="${terms}" var="t">
                                             <c:choose>
                                                 <c:when test="${t.id eq selectedTerm.id}">
@@ -125,10 +112,11 @@
                             </div>
                         </div>
                     </div>
-<%--
-                    </form>
---%>
+
+                   <%-- </form>--%>
+
                 </div>
             </section>
+            </form>
         </div>
 

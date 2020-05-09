@@ -6,16 +6,13 @@
         <div id="container">
             <section>
                 <div id="titleTermsList" class="row">
-                        <div class="form">
-                            <form action="/terms-list">
+                        <form action="/terms-list">
                             <div class="form-row">
                                 <div id="divFormTitle" class="form-group col-sm-4">
                                     <h5>Выбрать семестр:</h5>
                                 </div>
                                 <div class="form-group col-sm-3">
-                                    <select type="text" id="select" class="form-control" name="selTerm">
-                                        <%--
-                                        <option selected>Семестр 1</option>--%>
+                                    <select type="text" id="select" class="form-control" name="selTerm"> <%-- отправляется на джаву и вытягивается по имени--%>
                                         <c:forEach items="${terms}" var="t">
                                             <c:choose>
                                                 <c:when test="${t.id eq selectedTerm.id}">
@@ -26,7 +23,6 @@
                                                     <option value="${t.id}">${t.name}</option>
                                                 </c:otherwise>
                                             </c:choose>
-
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -34,11 +30,10 @@
                                     <button type="submit" id="btn" class="btn btn-outline-secondary">Выбрать</button>
                                 </div>
                             </div>
-                            </form>
                             <div id="divDurationTerm" class="row">
                                 <h5><div class="col-sm-12">Длительность семестра <b> ${selectedTerm.duration} </b></div></h5>
                             </div>
-                        </div>
+                        </form>
                     </div>
             </section>
             <section id="sectionBody">
@@ -66,25 +61,24 @@
                         <section>
                             <div id="divTermsList1" class="row">
                                 <div class="divTermsList col-sm-12">
-                                    <a href="/termCreating.jsp">
+                                    <a href="/term-create">
                                         <button id="button1" type="button" class="btn btn-outline-secondary btn-lg btn-block">Создать семестр</button>
                                     </a>
                                 </div>
                             </div>
                             <div id="divTermsList2" class="row">
-                                <div class="divTermsList col-sm-12" >
-                                    <%--
-                                    <a onclick="modyfyTerm()"> </a>--%>
-                                    <a href="/termModifying.jsp">
-                                        <button id="button2" type="button" class="btn btn-outline-secondary btn-lg btn-block">Модифицировать выбранную дисциплину</button>
-                                    </a>
 
-                                </div>
+                                    <form action="/term-modify">
+                                        <div class="divTermsList col-sm-12" >
+                                        <input type="hidden" name="sel" value="${selectedTerm.id}">
+                                        <button id="button2" type="submit" class="btn btn-outline-secondary btn-lg btn-block">Модифицировать выбранный семестр</button>
+                                        </div>
+                                    </form>
                             </div>
                             <div id="divTermsList3" class="row">
                                 <div class="divTermsList3 col-sm-12">
                                     <a href="#">
-                                        <button id="button3" type="button" class="btn btn-outline-secondary btn-lg btn-block">Удалить выбранную дисциплину</button>
+                                        <button id="button3" type="button" class="btn btn-outline-secondary btn-lg btn-block">Удалить выбранный семестр</button>
                                     </a>
                                 </div>
                             </div>
