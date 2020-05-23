@@ -27,18 +27,6 @@ public class LoginFilter implements Filter {
         }
         }
 
-//        if(req.getSession().getAttribute("isLogin")==null){
-//            req.getSession().setAttribute("isLogin","0");
-//            resp.sendRedirect("/login");
-//        }
-//        else   if(req.getSession().getAttribute("isLogin").equals("0")){
-//              if(req.getRequestURI().endsWith("/login")){
-//                  filterChain.doFilter(req,resp);
-//                  return;
-//              }
-//              else {resp.sendRedirect("/login");
-//              return;}
-//          }
         if(!req.getRequestURI().endsWith(".css") &&
                 !req.getRequestURI().endsWith(".js")){
             if (req.getSession().getAttribute("isLogin") == null) {

@@ -68,16 +68,27 @@
                             </div>
                             <div id="divTermsList2" class="row">
 
+
                                     <form action="/term-modify">
+
                                         <div class="divTermsList col-sm-12" >
+                                            <%--<a href="/term-modify">--%>
+
                                         <input type="hidden" name="sel" value="${selectedTerm.id}">
+
                                         <button id="button2" type="submit" class="btn btn-outline-secondary btn-lg btn-block">Модифицировать выбранный семестр</button>
+
+                                        <%--<button id="button2" type="button" class="btn btn-outline-secondary btn-lg btn-block">Модифицировать выбранный семестр</button>--%>
+
                                         </div>
+
                                     </form>
+
+                                    <%--</a>--%>
                             </div>
                             <div id="divTermsList3" class="row">
                                 <div class="divTermsList3 col-sm-12">
-                                    <a href="#">
+                                    <a href="/term-modify">
                                         <button id="button3" type="button" class="btn btn-outline-secondary btn-lg btn-block">Удалить выбранный семестр</button>
                                     </a>
                                 </div>

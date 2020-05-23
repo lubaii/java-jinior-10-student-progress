@@ -94,3 +94,57 @@ function progressStudentes() {
     $('#idProgressStuds').val(id);
    $('#formProStudent').submit();
 }
+function modyfyTerm() {
+    var items = $("input[type=checkbox]:checked");
+
+    if (items.length == 0) {
+        alert("Please select discipline");
+        return;
+    }
+    if (items.length > 1) {
+        alert("Please select One disciplines");
+        return;
+    }
+    var id = $(items[0]).attr("value");
+
+    $('#idModifyTerm').val(id);
+    $('#formModifingTerm').submit();}
+
+function SelectShow()
+{
+
+    var len= document.getElementById("discP").options.length;
+/*
+    var len2= document.getElementById("discP").options.selectedIndex==false;
+*/
+    var SelectElements = new Array;
+    var i =0;
+
+
+    for (var n = 0; n < len; n++)
+    {
+        if (document.getElementById("discP").options[n].selected==true)
+        {
+            SelectElements[i]=document.getElementById("discP").options[n].text;
+
+            i++;
+        }
+       /* if (document.getElementById("discP").options[n].selected==false)
+        {
+            alert("Выберете хотя бы один семестр");
+
+        }*/
+    }
+    if (SelectElements.length ==0) {
+        alert("Выберете хотя бы один семестр");
+        return;
+    }
+
+
+
+    var arr = jQuery.makeArray( SelectElements );
+
+    $('#idModifyTerm').val(arr);
+    $('#formModifingTerm').submit();
+
+}

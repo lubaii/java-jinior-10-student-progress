@@ -26,7 +26,6 @@ public class TermCreateController extends HttpServlet {
         req.setAttribute("terms",terms);
 
         req.setAttribute("currentPage", "/WEB-INF/jsp/termCreating.jsp");
-        // jsp сервлет, в тело ответа идет из базы...
         req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp);
     }
 
@@ -36,28 +35,30 @@ public class TermCreateController extends HttpServlet {
         String[] discP = req.getParameterValues("discP");
 
         List<String> disci = Arrays.asList(discP);
-        for(String s : disci){
-            List<Discipline> disciplines = DBManager.getAllActiveDisciplines();
-            for(Discipline d :disciplines){
+        List<Integer>listInt = new ArrayList<Integer>();
+        List<Discipline> disciplines = DBManager.getAllActiveDisciplines();
+        for(Discipline d :disciplines){
+            for(String s : disci){
                 String dd = d.getDiscipline();
                 if(dd.equals(s)){
                     System.out.println("прошло");
-
-                    List<Integer>listInt = new ArrayList<Integer>();
-                    while (disci.size()!=0){
-                        int item= d.getId();
-                        listInt.add(item);
-                    }
-                    List<Term>termList=DBManager.getAllActiveTerm();
-                    for(Term t :termList){
-                        if(t.equals(nameOfDisc));
-                        int ttt=t.getId();
-                        DBManager.insertNewDisciplineandTerm(ttt,listInt);
-                    }
-
+                    int item= d.getId();
+                    listInt.add(item);
                 }
             }
         }
+        List<Term>termList=DBManager.getAllActiveTerm();
+        for(Term t :termList) {
+           String ss= t.getDuration();
+            if (ss.equals(nameOfDisc)) {
+                int ttt = t.getId();
+                DBManager.insertNewDisciplineandTerm(ttt, listInt);
+                break;
+            }
+
+        }
+
+
         resp.sendRedirect("/terms-list"); // перенаправляем на контроллеру disciplines
     }
 }
