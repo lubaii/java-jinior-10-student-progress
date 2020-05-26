@@ -22,7 +22,7 @@
             <form action="/term-modify">
                 <input type="hidden" name="sel" value="${select}" id="select">
                 <div id="titleForm" class="form-group row">
-                    Для создания семестра заполните все поля и нажмите кнопку "Редактировать":
+                    Для модифицирования семестра выберете поля и нажмите кнопку "Удалить":
                 </div>
                 <div id="divFormGroupRow" class="form-group row needs-validation was-validated">
                     <label id="lbl1" class="col-sm-6 col-form-label">Длительность семестра (в неделях):</label>
@@ -53,7 +53,7 @@
                         <button type="submit" class="btn btn-outline-secondary btn btn-block">Редактировать</button>
 --%>
                         <a onclick="SelectShow()">
-                        <button type="button" class="btn btn-outline-secondary btn btn-block">Редактировать</button>
+                        <button type="button" class="btn btn-outline-secondary btn btn-block">Удалить дисциплины</button>
                         </a>
                     </div>
                 </div>

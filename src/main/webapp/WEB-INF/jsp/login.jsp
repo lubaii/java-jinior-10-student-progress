@@ -44,7 +44,6 @@
                                 <select class="form-control" id="roleID" name="role">
                                     <option value="1">Администратор</option>
                                     <option value="2">Студент</option>
-                                    <option value="3">Учитель</option>
                                 </select>
                             </div>
                             <div class="valid-tooltip">Хорошо!</div>

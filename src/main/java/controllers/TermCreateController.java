@@ -16,14 +16,25 @@ import java.util.List;
 
 @WebServlet(name = "TermCreateController", urlPatterns = "/term-create")
 public class TermCreateController extends HttpServlet {
+    String  selTerm;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Discipline> disciplines = DBManager.getAllActiveDisciplines(); // подключается к базе ланных, достает все дисциплины
-
-        req.setAttribute("disc", disciplines); //устанавливает атрибуты дициплины
+          selTerm = req.getParameter("term");
 
         List<Term> terms = DBManager.getAllActiveTerm();
-        req.setAttribute("terms",terms);
+        if (selTerm != null) {
+            for (Term t : terms) {
+                String cur = t.getId() + "";
+                if (cur.equals(selTerm)) {
+                    req.setAttribute("select", t); // отображение семестров
+                }
+            }
+        }
+        List<Discipline> disciplines = DBManager.getAllActiveDisciplines(); // подключается к базе ланных, достает все дисциплины
+        req.setAttribute("disc", disciplines); //устанавливает атрибуты дициплины
+
+
+        //req.setAttribute("terms",terms);
 
         req.setAttribute("currentPage", "/WEB-INF/jsp/termCreating.jsp");
         req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp);
@@ -31,26 +42,35 @@ public class TermCreateController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String nameOfDisc = req.getParameter("terms"); //вытягивает в джаву в jsp страницуб вытянит то что ввел пользователь
-        String[] discP = req.getParameterValues("discP");
+      //  String nameOfDisc = req.getParameter("terms"); //вытягивает в джаву в jsp страницуб вытянит то что ввел пользователь
+        String[] discP = req.getParameterValues("idAdddisciplines");
 
-        List<String> disci = Arrays.asList(discP);
-        List<Integer>listInt = new ArrayList<Integer>();
-        List<Discipline> disciplines = DBManager.getAllActiveDisciplines();
-        for(Discipline d :disciplines){
-            for(String s : disci){
-                String dd = d.getDiscipline();
-                if(dd.equals(s)){
-                    System.out.println("прошло");
-                    int item= d.getId();
-                    listInt.add(item);
-                }
-            }
+        List<String> strListDisc = new ArrayList<String>();
+        String str = Arrays.toString(discP);
+        str= str.replace("]","");
+        str= str.replace("[","");
+        for(String s :str.split(",")){
+            strListDisc.add(s);
         }
+
+
+        List<Discipline> disciplines = DBManager.getAllActiveDisciplines();
+        List<Integer>listInt = new ArrayList<Integer>();
+        for(Discipline d :disciplines){
+            for(String sts:strListDisc){
+            String dd = d.getDiscipline();
+            if(dd.equals(sts)){
+                int item= d.getId();
+                listInt.add(item);
+            }
+          }
+        }
+
         List<Term>termList=DBManager.getAllActiveTerm();
         for(Term t :termList) {
-           String ss= t.getDuration();
-            if (ss.equals(nameOfDisc)) {
+
+           String ss= t.getId()+"";
+            if (ss.equals(selTerm)) {
                 int ttt = t.getId();
                 DBManager.insertNewDisciplineandTerm(ttt, listInt);
                 break;

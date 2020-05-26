@@ -148,3 +148,27 @@ function SelectShow()
     $('#formModifingTerm').submit();
 
 }
+  function AddDiscShow(){
+      var len= document.getElementById("formControlSelect").options.length;
+      var SelectElements = new Array;
+      var i =0;
+      for (var n = 0; n < len; n++)
+      {
+          if (document.getElementById("formControlSelect").options[n].selected==true)
+          {
+              SelectElements[i]=document.getElementById("formControlSelect").options[n].text;
+
+              i++;
+          }
+
+      }
+      if (SelectElements.length ==0) {
+          alert("Выберете хотя бы одну дисциплину");
+          return;
+      }
+      var arrDis = jQuery.makeArray(SelectElements);
+
+      $( "#idAdddisciplines" ).val(arrDis);
+      $( "#formControlSelectDis" ).submit();
+
+  }

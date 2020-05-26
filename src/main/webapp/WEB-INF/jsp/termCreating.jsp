@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
+<%--
 
 <script>
     function validLogin(){
@@ -17,6 +18,7 @@
             f.submit();
     }
 </script>
+--%>
 
 
         <nav>
@@ -32,30 +34,29 @@
         <div id="container">
             <section>
                 <div id="containerForm" class="row">
-<%--
-                    <form action="/term-create" method="post" onsubmit="return validLogin();">
---%>
-                    <form action="/term-create" method="post" onsubmit="alert('Выберете семестр!');return false">
+             <form action="/term-create">
+                        <input type="hidden" name="term" value="${select}" id="select">
                         <div id="titleForm" class="form-group row">
                             Для создания семестра заполните все поля и нажмите кнопку "Создать":
                         </div>
-                        <div id="divFormGroupRow" class="form-group row needs-validation was-validated" action="/term-create">
+                        <div id="divFormGroupRow" class="form-group row needs-validation was-validated">
                             <label id="lbl1" class="col-sm-6 col-form-label">Длительность семестра (в неделях):</label>
                             <div id="divInput" class=" form-group col-sm-2" >
-                           <input type="text"  list="select" name ="terms" value="" placeholder="18 недель" >
+                                <b> ${select.duration}</b>
+                           <%--<input type="text"  list="select" name ="terms" value="" placeholder="18 недель" >
                          <datalist id="select">
                             <c:forEach items ="${terms}" var="t">
                           <option value="${t.duration}">
                           </c:forEach>
-                           </datalist>
+                           </datalist>--%>
                         </div>
                            </div>
                            <div id="divFormSelect" class="form-group row">
                                <label id="lbl2" class="col-sm-6">Дисциплины в семестре:</label>
-                               <script>
+                             <%--  <script>
                                    $( "#formControlSelect" ).val();
-                               </script>
-                              <select name="discP" multiple class="form-control col-sm-6" id="formControlSelect" size="7">
+                               </script>--%>
+                              <select name="discP[]" multiple class="form-control col-sm-6" id="formControlSelect" size="7">
                                 <c:forEach items="${disc}" var="d">
                                 <option><li><c:out value="${d.discipline}"/></li><br /></option>
                                 </c:forEach>
@@ -63,10 +64,20 @@
                         </div>
                         <div class="form-group row">
                             <div id="divButton" class="col-sm-9">
+<%--
                                 <button type="submit" class="btn btn-outline-secondary btn btn-block">Создать</button>
+--%>
+                                   <a onclick="AddDiscShow()">
+                                     <button type="button" class="btn btn-outline-secondary btn btn-block" >Создать</button>
+                                  </a>
                             </div>
                         </div>
                     </form>
                 </div>
             </section>
         </div>
+
+
+<form id="formControlSelectDis" method="post" action="/term-create">
+    <input type="hidden" id="idAdddisciplines" name="idAdddisciplines" value="">
+</form>

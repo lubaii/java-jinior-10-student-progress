@@ -28,17 +28,21 @@ public class DBManager {
             getAccountByLoginPasswordRole = con.prepareStatement("SELECT * FROM user_role\n" +
                     "left join user on user_role.id_user = user.id\n" +
                     "where user.login = ? and user.password = ? and user_role.id_role = ?;");
-            getAllActiveTerm = con.prepareStatement("SELECT * FROM term_discipline as td\n" +
+            getAllActiveTerm = con.prepareStatement("SELECT * FROM term_discipline as td \n" +
                     "left join term as t on td.id_term = t.id\n" +
                     "left join discipline as d on td.id_discipline = d.id\n" +
-                    "where td.status_dis = 1 and t.status = 1 and d.status = 1 order by td.id_term");
+                    "where td.status_dis = 1 and  t.status = 1 and d.status = 1 group by  td.id_discipline, td.id_term;");
+            /*getAllActiveTerm = con.prepareStatement("SELECT * FROM term_discipline as td\n" +
+                    "left join term as t on td.id_term = t.id\n" +
+                    "left join discipline as d on td.id_discipline = d.id\n" +
+                    "where td.status_dis = 1 and t.status = 1 and d.status = 1 order by td.id_term");*/
             modifySrudent = con.prepareStatement("UPDATE `student` SET `first_name` = ?, `last_name` = ?, `group` = ?, `date` = ? WHERE (`id` = ?);");
             getMarksbyStudandTerm = con.prepareStatement("SELECT * FROM student_crm.mark\n" +
                     "left join student on mark.id_student=student.id\n" +
                     "left join term_discipline on mark.id_term_discipline=term_discipline.id\n" +
                     "left join term on term_discipline.id_term=term.id\n" +
                     "left join discipline on term_discipline.id_discipline = discipline.id\n" +
-                    "where discipline.status=1 and term.status=1 and student.id=? and term.id=?;");
+                    "where discipline.status=1 and term.status=1 and student.id=? and term.id=? group by id_term_discipline;");
             getAllActiveMarkStud = con.prepareStatement("SELECT mark.*,discipline.id l2,discipline.discipline,discipline.status,student.*,term.* from student_crm.mark \n" +
                     "left join discipline on mark.id=discipline.id \n" +
                     "left join student on mark.id_student=student.id \n" +
@@ -115,15 +119,16 @@ public class DBManager {
         }
     }
 
-    public static void deleteDisciplineandinTerm( List<String> disciplines, String id) {
+    public static void deleteDisciplineandinTerm(String id,List<String> disciplines) {
         int i = disciplines.size();
         while (i>0) {
             for(String s : disciplines) {
                 try {
                     //Statement stm = con.createStatement();
                     //deleteDisciplineandinTerm.setString(1,"0");
-                    deleteDisciplineandinTerm.setString(1,s);
-                    deleteDisciplineandinTerm.setString(2,id);
+
+                    deleteDisciplineandinTerm.setString(1,id);
+                    deleteDisciplineandinTerm.setString(2,s);
                     deleteDisciplineandinTerm.execute();
                    // stm.execute("UPDATE `student_crm`.`term_discipline` SET `id_discipline` = '0' WHERE (`id_term` = '"+id+"' and `id_discipline` = '" + s + "');");
                     // stm.execute("UPDATE `student_crm`.`term_discipline` SET `id_discipline` = '" + s + "' WHERE (`id` = '?');");
@@ -413,7 +418,7 @@ public class DBManager {
            // ResultSet rs = stm.executeQuery("SELECT * FROM student_crm.term_discipline where id_term=" + idTerm + ";");
             ResultSet rs = stm.executeQuery("SELECT * FROM student_crm.term_discipline\n" +
                     "left join discipline on term_discipline.id_discipline=discipline.id\n" +
-                    "where id_term=" + idTerm + " and status=1;");
+                    "where id_term=" + idTerm + " and status_dis=1 and status=1;");
 
             while (rs.next()) {
              Discipline discipline = new Discipline();

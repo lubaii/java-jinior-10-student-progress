@@ -13,7 +13,7 @@
     <a id="home" href="/" class="nav">
         <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
     </a>
-    <a id="studentsList" href="studentsList.jsp" class="nav">
+    <a id="studentsList" href="/students" class="nav">
         <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
     </a>
 </div>

@@ -24,8 +24,8 @@ public class Main {
         List<String> strList = new ArrayList<String>();
         String str = Arrays.toString(wos);
        // if(str.contains("[")||str.contains("]")){
-         str= str.replaceAll("]","");
-         str= str.replaceAll("[","");
+         str= str.replace("]","");
+         str= str.replace("[","");
            // str.replaceAll("[","");
       //  }
         for(String s :str.split(",")){
