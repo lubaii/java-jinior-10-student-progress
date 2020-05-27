@@ -74,10 +74,10 @@
                 <c:if test="${role eq 1}">
                     <th scope="col">
                         <div class="custom-control custom-checkbox">
-                                <%--
-                                                        <input type="checkbox" class="custom-control-input" id="cbxAll" >
-                                --%>
-                            <label class="custom-control-label">Выбрать</label>
+
+                            <input type="checkbox" class="custom-control-input" id="cbxAll" >
+
+                            <%--<label class="custom-control-label">Выбрать</label>--%>
                         </div>
                             <%--                            <img src="/icons-1.0.0-alpha2/icons/check-box.svg" alt="" width="20" height="20" title="Checkbox">--%>
                     </th>

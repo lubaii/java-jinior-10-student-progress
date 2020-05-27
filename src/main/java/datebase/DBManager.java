@@ -22,8 +22,13 @@ public class DBManager {
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+           // con = DriverManager.getConnection("jdbc:mysql://root@45.129.97.12:22/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+          con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+           //con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+         //  con = DriverManager.getConnection("jdbc:mysql://45.129.97.12/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+           //con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+          // con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
             modifyDiscipline = con.prepareStatement("UPDATE `discipline` SET `discipline` = ? WHERE (`id` = ?);");
             getAccountByLoginPasswordRole = con.prepareStatement("SELECT * FROM user_role\n" +
                     "left join user on user_role.id_user = user.id\n" +
