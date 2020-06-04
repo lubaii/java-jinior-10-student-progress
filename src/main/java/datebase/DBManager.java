@@ -23,11 +23,11 @@ public class DBManager {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
            // con = DriverManager.getConnection("jdbc:mysql://root@45.129.97.12:22/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
-          con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+         // con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
            //con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
          //  con = DriverManager.getConnection("jdbc:mysql://45.129.97.12/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
            //con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
-          // con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+         //  con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
             modifyDiscipline = con.prepareStatement("UPDATE `discipline` SET `discipline` = ? WHERE (`id` = ?);");
             getAccountByLoginPasswordRole = con.prepareStatement("SELECT * FROM user_role\n" +
@@ -36,18 +36,28 @@ public class DBManager {
             getAllActiveTerm = con.prepareStatement("SELECT * FROM term_discipline as td \n" +
                     "left join term as t on td.id_term = t.id\n" +
                     "left join discipline as d on td.id_discipline = d.id\n" +
-                    "where td.status_dis = 1 and  t.status = 1 and d.status = 1 group by  td.id_discipline, td.id_term;");
+                    "where td.status_dis = 1 and  t.status = 1 and d.status = 1;");
+           /* getAllActiveTerm = con.prepareStatement("SELECT * FROM term_discipline as td \n" + // c group by для индивидуальных значений
+                    "left join term as t on td.id_term = t.id\n" +
+                    "left join discipline as d on td.id_discipline = d.id\n" +
+                    "where td.status_dis = 1 and  t.status = 1 and d.status = 1 group by  td.id_discipline, td.id_term;");*/
             /*getAllActiveTerm = con.prepareStatement("SELECT * FROM term_discipline as td\n" +
                     "left join term as t on td.id_term = t.id\n" +
                     "left join discipline as d on td.id_discipline = d.id\n" +
                     "where td.status_dis = 1 and t.status = 1 and d.status = 1 order by td.id_term");*/
             modifySrudent = con.prepareStatement("UPDATE `student` SET `first_name` = ?, `last_name` = ?, `group` = ?, `date` = ? WHERE (`id` = ?);");
+            /*getMarksbyStudandTerm = con.prepareStatement("SELECT * FROM student_crm.mark\n" + // для дисциплин, которые один раз выводят
+                    "left join student on mark.id_student=student.id\n" +
+                    "left join term_discipline on mark.id_term_discipline=term_discipline.id\n" +
+                    "left join term on term_discipline.id_term=term.id\n" +
+                    "left join discipline on term_discipline.id_discipline = discipline.id\n" +
+                    "where discipline.status=1 and term.status=1 and student.id=? and term.id=? group by id_term_discipline;");*/
             getMarksbyStudandTerm = con.prepareStatement("SELECT * FROM student_crm.mark\n" +
                     "left join student on mark.id_student=student.id\n" +
                     "left join term_discipline on mark.id_term_discipline=term_discipline.id\n" +
                     "left join term on term_discipline.id_term=term.id\n" +
                     "left join discipline on term_discipline.id_discipline = discipline.id\n" +
-                    "where discipline.status=1 and term.status=1 and student.id=? and term.id=? group by id_term_discipline;");
+                    "where discipline.status=1 and term.status=1 and student.id=? and term.id=?");
             getAllActiveMarkStud = con.prepareStatement("SELECT mark.*,discipline.id l2,discipline.discipline,discipline.status,student.*,term.* from student_crm.mark \n" +
                     "left join discipline on mark.id=discipline.id \n" +
                     "left join student on mark.id_student=student.id \n" +

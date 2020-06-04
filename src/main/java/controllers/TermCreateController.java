@@ -30,6 +30,8 @@ public class TermCreateController extends HttpServlet {
                 }
             }
         }
+       // List<Discipline> disciplines = DBManager.getDisceplinesinTerm(selTerm);
+
         List<Discipline> disciplines = DBManager.getAllActiveDisciplines(); // подключается к базе ланных, достает все дисциплины
         req.setAttribute("disc", disciplines); //устанавливает атрибуты дициплины
 

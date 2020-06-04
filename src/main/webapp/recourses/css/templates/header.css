@@ -30,7 +30,8 @@ body {
 
 #logout:hover {
     border: 2px rgb(112, 156, 178) solid;
-    font-style: italic;
+    /*font-style: italic;*/
+    font-family:'Lobster',cursive;;
     color: #f5fff9;
     background: rgb(112, 156, 178);
     text-decoration: none;
