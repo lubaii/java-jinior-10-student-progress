@@ -25,7 +25,8 @@
         </nav>
         <div id="container">
             <section>
-                <div id="containerForm" class="row">
+                <%--<div id="containerForm" class="row">--%>
+                <div id="containerForm" class="rowCreateStudent">
 
                     <form class="needs-validation was-validated"  method="post" action="/student-modify">
                         <%--<form class="needs-validation was-validated"  method="post" action="/students">--%>

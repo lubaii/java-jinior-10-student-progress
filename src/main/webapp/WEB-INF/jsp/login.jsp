@@ -4,8 +4,14 @@
 
 <link rel="stylesheet" href="./recourses/css/style.css">
 <style>
+
+    .container-fluid{
+        height: 110%
+    }
     .col-sm-8 {
-        font-family: 'Lobster', cursive;
+        /*font-family: 'Lobster', cursive;
+        background: white !important;*/
+
     }
     .row {
         /*border: 1px solid #6c757d;
@@ -14,10 +20,11 @@
         border:none !important;
         /*width: 295px !important;*/
         margin: 30px 0;
-        padding: 15px 0;
-        /* box-shadow: 0 0 12px 2px #6c757d;*/
-         box-shadow: none !important;
-         text-align: center;
+        padding:0px;
+        font-size: x-large !important;
+        box-shadow: none !important;
+        text-align: center;
+        /*height: 50%;*/
     }
     /*.form-group row{
         border:none;
@@ -29,6 +36,12 @@
     }
     .col-sm-2 col-form-label{
         width: 300px !important;
+    }
+    .val{
+        padding: 80px;
+        margin: 60px;
+        text-align: left;
+        text-transform: none;
     }
 </style>
 
@@ -81,8 +94,9 @@
                             <div class="col-sm-3">
                                <%-- <button type="submit" class="btn btn-outline-secondary btn btn-block">Войти</button>--%>
                                     <%--<div class="wrapper-no4">--%>
-                                    <button  class="button-bird">
-                                            <p class="button-bird__text">SEND</p>
+                                    <button type="submit" class="button-bird">
+                                            <%--<p class="button-bird__text"><input type="submit">"Войти"</p>--%>
+                                            <p class="button-bird__text">Войти</p>
                                             <svg version="1.1" class="feather" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                  viewBox="0 0 75 38" style="enable-background:new 0 0 75 38;" xml:space="preserve">
         <g>
@@ -129,7 +143,7 @@
                             </div>
                         </div>
                        <c:if test="${errorMessage eq 1}">
-                        <div> Логин или пароль не верны! </div>
+                        <div class="val"> Логин или пароль не верны! </div>
                         </c:if>
                     </form>
                 </div>
@@ -140,6 +154,22 @@
     </div>
 </div>
 </div>
+<%--<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        var el = document.querySelector(".button-bird");
+        var text = document.querySelector(".button-bird__text");
+        el.addEventListener('click', function() {
+            el.classList.toggle('active');
+
+            if(el.classList.contains('active')){
+                console.log('true');
+                text.innerHTML = 'Done';
+            }else{
+                text.innerHTML = 'SEND';
+            }
+        });
+    });
+</script>--%>
 <%--
 <head>
     <!--<meta> charset="utf-8"-->
@@ -241,19 +271,4 @@
 </div>
 </body>--%>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-        var el = document.querySelector(".button-bird");
-        var text = document.querySelector(".button-bird__text");
-        el.addEventListener('click', function() {
-            el.classList.toggle('active');
 
-            if(el.classList.contains('active')){
-                console.log('true');
-                text.innerHTML = ' ';
-            }else{
-                text.innerHTML = 'SEND';
-            }
-        });
-    });
-</script>

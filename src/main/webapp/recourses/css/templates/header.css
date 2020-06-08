@@ -4,39 +4,145 @@
 }
 
 body {
-    background-color: #f5fff9;
-    box-shadow: inset 0px 0px 43px -6px rgba(112, 156, 178, 1);
+    /*background-color: #f5fff9;
+    box-shadow: inset 0px 0px 43px -6px rgba(112, 156, 178, 1);*/
     margin-right: 16px;
 }
 
 #containerHeader {
     height: 100pt;
-    padding-top: 30pt;
+    padding-top: 50pt;
 }
-
-#titleHeader {
+/*#innerHeader {
     border: 2px rgb(112, 156, 178) solid;
     border-radius: 4px;
-    background: #f5fff9;
-    color: rgb(112, 156, 178);
+}*/
+
+/*#titleHeader {
+    font-family: Lobster, cursive;
+    letter-spacing: 1.2px;
+    font-size: xx-large;
     text-align: center;
+
+    background: #131335;
+    border-radius: 5px;
+    color: #BEEDFF;
+    padding: 2px;
+
+
+}*/
+#titleHeader {
+    font-family: Lobster, cursive;
+    letter-spacing: 1.2px;
+    font-size: xx-large;
+    text-align: center;
+
+    background: #131335;
+    border-radius: 5px;
+    color: #BEEDFF;
+    /*padding: 2px*/;
+    /**********/
+    margin: 1px;
+    /*overflow: hidden;*/ /** движение лучей********/
+    /* Цвет фона в формате hsl, радиальный градиент */
+    background: radial-gradient(white 80px, hsl(227, 59%, 77%) 50em);
+    position: relative;
+
+}
+/* Позиционируем эффект по центру*/
+.astra {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* Убираем маркеры списка */
+    list-style: none;
+    /* Подключаем анимацию вращения */
+    animation: 30s rotate infinite linear;
+}
+/* Границы с тенью при помощи псевдоэлементов */
+.luh,
+.luh:before,
+.luh:after {
+    position: absolute;
+    border: 0 solid transparent;
+    border-width: 2em 20em;
+    width: 0px;
+    height: 0px;
+    box-shadow: 0 0 2em .5em white;
+}
+/* Разбег лучей */
+.luh {
+    left: -20em;
+    top: 50%;
+    margin-top: -2em;
+    transform: rotate(.3deg);
+}
+/* Длина лучей зависит от позиции*/
+.luh:before,
+.luh:after {
+    left: -20em;
+    top: -2em;
+    display: block;
+    content: "";
+}
+.luh:before {
+    transform: rotate(60deg);
+}
+.luh:after {
+    transform: rotate(-60deg);
+}
+/* Добавляем смещение для каждой группы лучей с помощью псевдокласса */
+.luh:nth-child(2){
+    transform: rotate(15deg);
+}
+.luh:nth-child(3){
+    transform: rotate(30deg);
+}
+.luh:nth-child(4){
+    transform: rotate(45deg);
 }
 
+@keyframes rotate {
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+.name1 {
+    z-index: 1;
+    position: absolute;
+    /*left: 27%*/;
+    top: -45px;
+    z-index: 1;
+    font: bold 40px Lobster, cursive;
+    color: hsl(0, 100%, 1%);
+    text-align: center;
+
+}
+/*********************/
 #logout {
-    border: 2px rgb(112, 156, 178) solid;
-    font-style: italic;
-    color: rgb(112, 156, 178);
+    border: 1px #6c757d solid;
+    font-family: Lobster, cursive;
+    color: #6c757d;
+    position: absolute;
+    top: 35px;
+    width: 180px;
 }
 
 #logout:hover {
     border: 2px rgb(112, 156, 178) solid;
     /*font-style: italic;*/
-    font-family:'Lobster',cursive;;
+    font-family:'Lobster',cursive;
+    letter-spacing: 1px;
     color: #f5fff9;
     background: rgb(112, 156, 178);
     text-decoration: none;
 }
 
-a {
+/*a {
     text-decoration: none;
+}*/
+.col-sm-2logout{
+    left: 90%;
+    top: -35px;
 }

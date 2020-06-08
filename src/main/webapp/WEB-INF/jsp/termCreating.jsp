@@ -26,7 +26,7 @@
                 <a id="home" href="/" class="nav">
                     <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
                 </a>
-                <a id="termsCreate" href="/term-create" class="nav">
+                <a id="termsCreate" href="/terms-list" class="nav">
                     <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
                 </a>
             </div>

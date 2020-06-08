@@ -35,7 +35,8 @@
         </div>
         <div class="col-md-8">
             <section>
-                <div id="containerForm" class="row">
+                <%--<div id="containerForm" class="row">--%>
+                <div id="containerForm" class="rowCreateStudent">
                     <form class="needs-validation was-validated" action="student-create" method="post">
                         <div id="titleForm" class="form-group row">
                             Для создания студента заполните все поля и нажмите кнопку "Создать":

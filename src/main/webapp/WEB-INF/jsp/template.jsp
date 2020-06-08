@@ -26,10 +26,16 @@
             <div class="row">
                 <div class="col-sm-2"></div>
                 <div id="titleHeader" class="col-sm-8">
-                    <h3>Система управления студентами и их успеваемостью</h3>
+                    <h3 class="name1">Система управления студентами и их успеваемостью</h3>
+                    <ul class="astra">
+                        <li class="luh"></li>
+                        <li class="luh"></li>
+                        <li class="luh"></li>
+                        <li class="luh"></li>
+                    </ul>
                 </div>
                 <c:if test="${currentPage ne '/WEB-INF/jsp/login.jsp'}"><%-- чтобы не отображалась кнопка "выйди" в логине--%>
-                <div class="col-sm-2">
+                <div class="col-sm-2logout">
                     <a id="logout" class="btn btn-link btn btn-sm" href="/logout">   <%--чтобы не отображалась кнопка выдйди--%>
 
                      Выйди,${user}

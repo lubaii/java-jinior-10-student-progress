@@ -26,10 +26,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-2"></div>
+                <%--<div id="titleHeader" class="col-sm-8">--%>
                 <div id="titleHeader" class="col-sm-8">
-                    <h3>Система управления студентами и их успеваемостью</h3>
+                    <h3 class="name1">Система управления студентами и их успеваемостью</h3>
+                    <ul class="astra">
+                        <li class="luh"></li>
+                        <li class="luh"></li>
+                        <li class="luh"></li>
+                        <li class="luh"></li>
+                    </ul>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-2logout">
                     <a id="logout" class="btn btn-link btn btn-sm" href="/logout">
                         <%--<button type="button" class="btn btn-outline-secondary btn-sm">--%>Выйди,${user}<%--</button>--%>
                     </a>

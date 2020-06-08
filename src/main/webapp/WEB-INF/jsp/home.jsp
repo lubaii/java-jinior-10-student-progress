@@ -38,10 +38,10 @@
 </script>--%>
 <style>
 .cont{
-    width: 600px;
+    width: 500px;
     position: absolute;
     bottom: 75px; /* Положение от нижнего края */
-    right: 600px;}
+    right: 500px;}
 </style>
 <script>jQuery(document).ready(function(){
     jQuery('.bxslider').bxSlider({
