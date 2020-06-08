@@ -22,18 +22,17 @@
 </script>
 --%>
 
-<div id="container" class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2">
             <nav>
                 <div id="divNav" class="row">
-                    <a id="home" href="/" class="btn btn-outline-secondary btn-sm">На главную</a>
-                    <a id="studentsList" href="students" class="btn btn-outline-secondary btn-sm">Назад</a>
-
+                    <a id="home" href="/" class="nav">
+                        <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
+                    </a>
+                    <a id="studentsList" href="/students" class="nav">
+                        <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
+                    </a>
                 </div>
             </nav>
-        </div>
-        <div class="col-md-8">
+        <div id="container">
             <section>
                 <%--<div id="containerForm" class="row">--%>
                 <div id="containerForm" class="rowCreateStudent">
@@ -97,7 +96,7 @@
 
                <div class="col-sm-6">
 <input type="text" class="form-control" id="receiptDate" name="date"
-     placeholder="2020-03-05" required>
+     placeholder="03-05-2020" required>
 </div>
 
 <%--
@@ -127,7 +126,5 @@
                     </form>
                 </div>
             </section>
-        </div>
         <div class="col-sm-2"></div>
     </div>
-</div>

@@ -7,9 +7,9 @@
         <a id="home" href="/" class="nav">
             <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
         </a>
-        <a id="termsCreate" href="/" class="nav">
+       <%-- <a id="termsCreate" href="/" class="nav">
             <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
-        </a>
+        </a>--%>
     </div>
 </nav>
 <div id="container">

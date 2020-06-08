@@ -34,17 +34,25 @@
                         <li class="luh"></li>
                     </ul>
                 </div>
-                <c:if test="${currentPage ne '/WEB-INF/jsp/login.jsp'}"><%-- чтобы не отображалась кнопка "выйди" в логине--%>
+               <%-- <c:if test="${currentPage ne '/WEB-INF/jsp/login.jsp'}">&lt;%&ndash; чтобы не отображалась кнопка "выйди" в логине&ndash;%&gt;
                 <div class="col-sm-2logout">
-                    <a id="logout" class="btn btn-link btn btn-sm" href="/logout">   <%--чтобы не отображалась кнопка выдйди--%>
+                    <a id="logout" class="btn btn-link btn btn-sm" href="/logout">   &lt;%&ndash;чтобы не отображалась кнопка выдйди&ndash;%&gt;
 
                      Выйди,${user}
                     </a>
                 </div>
-                </c:if>
+                </c:if>--%>
             </div>
         </div>
     </div>
+    <c:if test="${currentPage ne '/WEB-INF/jsp/login.jsp'}"><%-- чтобы не отображалась кнопка "выйди" в логине--%>
+        <div class="col-sm-2logout">
+            <a id="logout" class="btn btn-link btn btn-sm" href="/logout">   <%--чтобы не отображалась кнопка выдйди--%>
+
+                Выйди,${user}
+            </a>
+        </div>
+    </c:if>
 </header>
 
 <jsp:include page="${currentPage}" flush="true" />

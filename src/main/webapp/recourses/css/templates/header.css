@@ -124,8 +124,9 @@ body {
     border: 1px #6c757d solid;
     font-family: Lobster, cursive;
     color: #6c757d;
-    position: absolute;
-    top: 35px;
+    position: fixed;
+    top: 45px;
+    left: 86%;
     width: 180px;
 }
 
