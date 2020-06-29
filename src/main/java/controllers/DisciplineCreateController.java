@@ -14,7 +14,7 @@ public class DisciplineCreateController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { // отображает только // получить информацию для чтения лекция 29
- // если метод doPost отправлено засекречено, не будет видно в строке браузера 29 лекциям, https://www.google.com/search?q=%D0BA, метод doGet
+        // если метод doPost отправлено засекречено, не будет видно в строке браузера 29 лекциям, https://www.google.com/search?q=%D0BA, метод doGet
         //HttpServletRequest req, HttpServletResponse resp
         req.setAttribute("currentPage", "/WEB-INF/jsp/disciplineCreating.jsp");
         // jsp сервлет, в тело ответа идет из базы...

@@ -7,9 +7,9 @@
         <a id="home" href="/" class="nav">
             <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
         </a>
-       <%-- <a id="termsCreate" href="/" class="nav">
-            <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
-        </a>--%>
+        <%-- <a id="termsCreate" href="/" class="nav">
+             <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
+         </a>--%>
     </div>
 </nav>
 <div id="container">
@@ -69,42 +69,44 @@
                     </tbody>
                 </table>
             </div>
-             <c:if test="${role eq 1}">
-            <div class="col-sm-5">
-                <section>
-                    <div id="divTermsList1" class="row">
-                        <form action="/term-create">
-                            <div class="divTermsList col-sm-12">
-                                <input type="hidden" name="term" value="${selectedTerm.id}">
-                                <button id="button1" type="submit" class="btn btn-outline-secondary btn-lg btn-block">
-                                    Добавить в семестр дисциплины
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div id="divTermsList2" class="row">
+            <c:if test="${role eq 1}">
+                <div class="col-sm-5">
+                    <section>
+                        <div id="divTermsList1" class="row">
+                            <form action="/term-create">
+                                <div class="divTermsList col-sm-12">
+                                    <input type="hidden" name="term" value="${selectedTerm.id}">
+                                    <button id="button1" type="submit"
+                                            class="btn btn-outline-secondary btn-lg btn-block">
+                                        Добавить в семестр дисциплины
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="divTermsList2" class="row">
 
 
-                        <form action="/term-modify">
+                            <form action="/term-modify">
 
-                            <div class="divTermsList col-sm-12">
-                                <input type="hidden" name="sel" value="${selectedTerm.id}">
+                                <div class="divTermsList col-sm-12">
+                                    <input type="hidden" name="sel" value="${selectedTerm.id}">
 
-                                <button id="button2" type="submit" class="btn btn-outline-secondary btn-lg btn-block">
-                                    Удалить дисциплины в семестре
-                                </button>
+                                    <button id="button2" type="submit"
+                                            class="btn btn-outline-secondary btn-lg btn-block">
+                                        Удалить дисциплины в семестре
+                                    </button>
 
-                                <%--<button id="button2" type="button" class="btn btn-outline-secondary btn-lg btn-block">Модифицировать выбранный семестр</button>--%>
+                                        <%--<button id="button2" type="button" class="btn btn-outline-secondary btn-lg btn-block">Модифицировать выбранный семестр</button>--%>
 
-                            </div>
+                                </div>
 
-                        </form>
+                            </form>
 
-                        <%--</a>--%>
-                    </div>
-                </section>
-               </div>
-             </c:if>
+                                <%--</a>--%>
+                        </div>
+                    </section>
+                </div>
+            </c:if>
         </div>
     </section>
 </div>

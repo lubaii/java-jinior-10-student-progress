@@ -9,14 +9,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <nav>
-<div id="divNav" class="row">
-    <a id="home" href="/" class="nav">
-        <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
-    </a>
-    <a id="studentsList" href="/students" class="nav">
-        <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
-    </a>
-</div>
+    <div id="divNav" class="row">
+        <a id="home" href="/" class="nav">
+            <button type="button" class="btn btn-outline-secondary btn-sm">На главную</button>
+        </a>
+        <a id="studentsList" href="/students" class="nav">
+            <button type="button" class="btn btn-outline-secondary btn-sm">Назад</button>
+        </a>
+    </div>
 </nav>
 <div id="container">
     <form action="/student-progress">

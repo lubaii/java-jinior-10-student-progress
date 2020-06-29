@@ -13,11 +13,12 @@ import java.text.SimpleDateFormat;
 
 @WebServlet(name = "StudentCreateController", urlPatterns = "/student-create")
 
-public class StudentCreateController  extends HttpServlet {
+public class StudentCreateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("currentPage", "/WEB-INF/jsp/student-create.jsp");
-        req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp);    }
+        req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,10 +33,10 @@ public class StudentCreateController  extends HttpServlet {
 
         try {
             String reformattedStr = myFormat.format(fromUser.parse(date));
-           // System.out.println("дата которая записывается в бд " +reformattedStr);
-            DBManager.insertNewStudent(surname,name,group,reformattedStr);
+            // System.out.println("дата которая записывается в бд " +reformattedStr);
+            DBManager.insertNewStudent(surname, name, group, reformattedStr);
             resp.sendRedirect("/students");
-        }catch (ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

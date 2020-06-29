@@ -16,7 +16,7 @@ public class TermsListControllers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String selTerm = req.getParameter("selTerm");
-      //  String selTerm = null;
+        //  String selTerm = null;
         List<Term> terms = DBManager.getAllActiveTerm();
         req.setAttribute("terms",terms);
         if(selTerm!=null) {
@@ -24,12 +24,18 @@ public class TermsListControllers extends HttpServlet {
                 String cur = t.getId() + "";
                 if (cur.equals(selTerm)) {
                     req.setAttribute("selectedTerm", t);
+                    req.getSession().setAttribute("selectedTerm", t);
                 }
             }
         }
         else
         {
-            req.setAttribute("selectedTerm",terms.get(0));
+            Term selTermFromSession = (Term) req.getSession().getAttribute("selectedTerm");
+            if (selTermFromSession != null) {
+                req.setAttribute("selectedTerm", selTermFromSession);
+            } else {
+                req.setAttribute("selectedTerm", terms.get(0));
+            }
         }
 
         req.setAttribute("currentPage", "/WEB-INF/jsp/termsList.jsp");

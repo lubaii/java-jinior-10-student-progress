@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="./recourses/css/index.css">
 
-    <script src="/recourses/js/fucnctions.js"type="text/javascript"></script>
+    <script src="/recourses/js/fucnctions.js" type="text/javascript"></script>
 
     <link href="http://fonts.googleapis.com/css?family=Lobster&display=swap&subset=cyrillic" rel="stylesheet">
 
@@ -34,14 +34,14 @@
                         <li class="luh"></li>
                     </ul>
                 </div>
-               <%-- <c:if test="${currentPage ne '/WEB-INF/jsp/login.jsp'}">&lt;%&ndash; чтобы не отображалась кнопка "выйди" в логине&ndash;%&gt;
-                <div class="col-sm-2logout">
-                    <a id="logout" class="btn btn-link btn btn-sm" href="/logout">   &lt;%&ndash;чтобы не отображалась кнопка выдйди&ndash;%&gt;
+                <%-- <c:if test="${currentPage ne '/WEB-INF/jsp/login.jsp'}">&lt;%&ndash; чтобы не отображалась кнопка "выйди" в логине&ndash;%&gt;
+                 <div class="col-sm-2logout">
+                     <a id="logout" class="btn btn-link btn btn-sm" href="/logout">   &lt;%&ndash;чтобы не отображалась кнопка выдйди&ndash;%&gt;
 
-                     Выйди,${user}
-                    </a>
-                </div>
-                </c:if>--%>
+                      Выйди,${user}
+                     </a>
+                 </div>
+                 </c:if>--%>
             </div>
         </div>
     </div>
@@ -49,13 +49,13 @@
         <div class="col-sm-2logout">
             <a id="logout" class="btn btn-link btn btn-sm" href="/logout">   <%--чтобы не отображалась кнопка выдйди--%>
 
-                Выйди,${user}
+                Выйди, ${user}
             </a>
         </div>
     </c:if>
 </header>
 
-<jsp:include page="${currentPage}" flush="true" />
+<jsp:include page="${currentPage}" flush="true"/>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -72,18 +72,16 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-$(function () {
+    $(function () {
 
-$("#receiptDate").datepicker(
-{
-dateFormat: "dd/mm/yy"
+        $("#receiptDate").datepicker(
+            {
+                dateFormat: "dd/mm/yy"
 
-}
-
-).val();
-});
+            }
+        ).val();
+    });
 </script>
-
 
 
 </body>

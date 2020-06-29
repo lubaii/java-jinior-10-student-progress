@@ -23,7 +23,7 @@ public class StudentModifyController extends HttpServlet {
 
         Student student = DBManager.getStudentById(idStud);
 
-        req.setAttribute("studs",student);
+        req.setAttribute("studs", student);
 
         req.setAttribute("currentPage", "/WEB-INF/jsp/studentModifying.jsp"); // отдали ответ
         req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp);
@@ -34,7 +34,7 @@ public class StudentModifyController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idModifyStuds = req.getParameter("idModifyStuds");
         String surname = req.getParameter("surname");
-        String name= req.getParameter("name");
+        String name = req.getParameter("name");
         String group = req.getParameter("group");
         String receiptDate = req.getParameter("date");
 
@@ -45,7 +45,7 @@ public class StudentModifyController extends HttpServlet {
             String reforStudsdate = myFormat.format(fromUser.parse(receiptDate));
             DBManager.modifySrudent(surname, name, group, reforStudsdate, idModifyStuds);
             resp.sendRedirect("/students"); //url поменялся у пользователя
-        } catch (ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

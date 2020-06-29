@@ -23,14 +23,14 @@ public class StudentProgressController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String stud = req.getParameter("idProgressStuds");
-        String selTerm = req.getParameter("sel");
-        Student student = DBManager.getStudentById(stud);
-        req.setAttribute("stuD", student);
+        String namestud = req.getParameter("idProgressStuds");// данные студента
+        String selTerm = req.getParameter("sel");// получение выбранного семестра семестра
+        Student student = DBManager.getStudentByIdProgress(namestud);
+        req.setAttribute("stuD", student);// установление в браузере данные студента
 
-        List<Semestr> semestrs = DBManager.getSemestrById(); // переимено
-        req.setAttribute("terms",semestrs);
-        List<Mark> marks = DBManager.getMarksbyStudandTerm(selTerm,stud);
+        List<Semestr> semestrs = DBManager.getSemestrById();
+        req.setAttribute("terms",semestrs); // установления списка семестра
+        List<Mark> marks = DBManager.getMarksbyStudandTerm(selTerm,namestud);
 
         double sumMarks =0;
         for(Mark m :marks){
@@ -52,34 +52,6 @@ public class StudentProgressController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String selTerm = req.getParameter("selTerm");
-/*
-        String idStud = req.getParameter("idProgressStuds");
-        List<Term> terms = DBManager.getAllActiveTermStud();
-        req.setAttribute("terms",terms);
-        if (idStud != null) {
-            Student student = DBManager.getStudentById(idStud);
-            String ss=student.getId()+"";
-            for(Term t : terms){
-                List<Student> listStuds = t.getStudents();
-                for (Student s :listStuds){
-                    String s1 = s.getId()+"";
-                    if(s1.equals(ss)){
-                       // req.setAttribute("selectedTerm",t);
-                        req.setAttribute("terms",terms);
 
-                    }
-                    break;
-                }
-            }
-
-        } else
-        {
-            req.setAttribute("selectedTerm",terms.get(0));
-        }
-
-        req.setAttribute("currentPage", "/WEB-INF/jsp/studentProgress.jsp");
-        req.getRequestDispatcher("./WEB-INF/jsp/template.jsp").forward(req, resp);
-*/
     }
 }

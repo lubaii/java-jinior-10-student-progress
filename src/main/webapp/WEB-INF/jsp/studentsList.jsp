@@ -75,11 +75,8 @@
                     <th scope="col">
                         <div class="custom-control custom-checkbox">
 
-                            <input type="checkbox" class="custom-control-input" id="cbxAll" >
-
-                            <%--<label class="custom-control-label">Выбрать</label>--%>
+                            <input type="checkbox" class="custom-control-input" id="cbxAll">
                         </div>
-                            <%--                            <img src="/icons-1.0.0-alpha2/icons/check-box.svg" alt="" width="20" height="20" title="Checkbox">--%>
                     </th>
                 </c:if>
                 <th scope="col">Фамилия</th>
@@ -88,37 +85,30 @@
                 <th scope="col">Дата поступления</th>
             </tr>
             </thead>
-            <%--
-            <tbody>--%>
 
             <c:forEach items="${studs}" var="s" varStatus="i"> <%-- var текущая дисциплина d - одна дисциплина--%>
 
             <c:if test="${s.firstname.length() > 0}">
             <tr>
                 <c:if test="${role eq 1}">
-                <th scope="row">
-                    <div class="custom-control custom-checkbox">
-                        <c:if test="${role eq 1}">
-                            <input type="checkbox" value="${s.id}" class="custom-control-input" id="cbx${i.count}"
-                                   required>
+                    <th scope="row">
+                        <div class="custom-control custom-checkbox">
+                            <c:if test="${role eq 1}">
+                                <input type="checkbox" value="${s.id}" class="custom-control-input" id="cbx${i.count}"
+                                       required>
 
-                            <label class="custom-control-label" for="cbx${i.count}"></label>
-                        </c:if>
-                    </div>
-                </th>
+                                <label class="custom-control-label" for="cbx${i.count}"></label>
+                            </c:if>
+                        </div>
+                    </th>
                 </c:if>
                 <td>${s.firstname}</td>
                 <td>${s.lastname}</td>
                 <td>${s.group}</td>
                 <fmt:parseDate value="${s.date}" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
                 <fmt:formatDate value="${date}" var="dateP" pattern="dd/MM/yyyy"/>
-
                 <td>${dateP}
 
-
-                        <%--
-                            <ftm: parseDate value="${s.date}" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
-                            <ftm: formatDate value="${date}" var="dateP" pattern="dd/MM/yyyy"/>--%>
                 </td>
 
             </tr>

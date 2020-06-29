@@ -20,9 +20,10 @@ import java.util.List;
 
 public class TermModifyControl extends HttpServlet {
     String termDB;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       String  selTerm = req.getParameter("sel");
+        String selTerm = req.getParameter("sel");
 
         List<Discipline> disciplines = DBManager.getDisceplinesinTerm(selTerm);
         req.setAttribute("disc", disciplines);
@@ -33,7 +34,7 @@ public class TermModifyControl extends HttpServlet {
                 String cur = t.getId() + "";
                 if (cur.equals(selTerm)) {
                     req.setAttribute("select", t); // отображение семестров
-                    termDB=cur;
+                    termDB = cur;
                 }
             }
         }
@@ -45,43 +46,33 @@ public class TermModifyControl extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String[] discP = req.getParameterValues("idModifyTerm");
+        String[] discP = req.getParameterValues("idModifyTerm"); // переменная для хранение дисциплин, вытащенная из браузера
 
-        List<String> strList = new ArrayList<String>();
+        List<String> modList = new ArrayList<String>();// модификация дисциплин для записили в БД
         String str = Arrays.toString(discP);
-        str= str.replace("]","");
-        str= str.replace("[","");
-        for(String s :str.split(",")){
-            strList.add(s);
+        str = str.replace("]", "");
+        str = str.replace("[", "");
+        for (String s : str.split(",")) {
+            modList.add(s);
         }
-
-
         String disId;
-        List<Discipline> disciplineList= DBManager.getAllActiveDisciplines();
+        List<Discipline> disciplineList = DBManager.getAllActiveDisciplines();
         List<String> sendDb = new ArrayList<String>();
-        for(Discipline d :disciplineList){
-            for(String s :strList){
-            String sd=d.getDiscipline()+"";
-            if(sd.equals(s)){
-                disId=d.getId()+"";
-                sendDb.add(disId);
+        for (Discipline d : disciplineList) {
+            for (String s : modList) {
+                String sd = d.getDiscipline() + "";
+                if (sd.equals(s)) {
+                    disId = d.getId() + "";
+                    sendDb.add(disId);
+                }
             }
-           }
 
         }
 
-        DBManager.deleteDisciplineandinTerm(termDB,sendDb);
+        DBManager.deleteDisciplineandinTerm(termDB, sendDb);
 
         resp.sendRedirect("/terms-list");
 
-    }
-
-    public  String convert(String[] mas,String delimetr){
-        StringBuffer sb = new StringBuffer();
-        for(String s :mas){
-            sb.append(s).append(delimetr);
-        }
-        return sb.substring(0,sb.length()-1);
     }
 
 }

@@ -22,13 +22,13 @@ public class DBManager {
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-           // con = DriverManager.getConnection("jdbc:mysql://root@45.129.97.12:22/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
-         // con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
-           //con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
-         //  con = DriverManager.getConnection("jdbc:mysql://45.129.97.12/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
-           //con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
-         //  con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+            // con = DriverManager.getConnection("jdbc:mysql://root@45.129.97.12:22/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+            // con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+            //con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+            //  con = DriverManager.getConnection("jdbc:mysql://45.129.97.12/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+            //con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:22:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+            //  con = DriverManager.getConnection("jdbc:mysql://45.129.97.12:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_crm?useUnicode=true&serverTimezone=UTC", "root", "Atb31423111986");
             modifyDiscipline = con.prepareStatement("UPDATE `discipline` SET `discipline` = ? WHERE (`id` = ?);");
             getAccountByLoginPasswordRole = con.prepareStatement("SELECT * FROM user_role\n" +
                     "left join user on user_role.id_user = user.id\n" +
@@ -64,7 +64,7 @@ public class DBManager {
                     "left join term on mark.id_term_discipline = term.id\n" +
                     "where  term.status=1 and student.status=1 order by term.id; ");
             //deleteDisciplineandinTerm=con.prepareStatement("UPDATE `student_crm`.`term_discipline` SET `id_discipline` = NULL WHERE (`id_term` = ? and `id_discipline` = ?);");
-            deleteDisciplineandinTerm=con.prepareStatement("UPDATE `student_crm`.`term_discipline` SET `status_dis` = '0' WHERE (`id_term` = ? and `id_discipline` = ?);");
+            deleteDisciplineandinTerm = con.prepareStatement("UPDATE `student_crm`.`term_discipline` SET `status_dis` = '0' WHERE (`id_term` = ? and `id_discipline` = ?);");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,8 +123,8 @@ public class DBManager {
             for (Integer s : disciplines) {
                 try {
                     Statement stm = con.createStatement();
-                    stm.execute("INSERT INTO `term_discipline` (`id_term`, `id_discipline`) VALUES ('" + term + "', '" + s + "');");
-                    //  INSERT INTO `student_crm`.`term_discipline` (`id_term`, `id_discipline`) VALUES ('3', '4');
+                    // stm.execute("INSERT INTO `term_discipline` (`id_term`, `id_discipline`) VALUES ('" + term + "', '" + s + "');");
+                    stm.execute("INSERT INTO `student_crm`.`term_discipline` (`id_term`, `id_discipline`, `status_dis`) VALUES ('" + term + "', '" + s + "','" + 1 + "');");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -134,18 +134,18 @@ public class DBManager {
         }
     }
 
-    public static void deleteDisciplineandinTerm(String id,List<String> disciplines) {
+    public static void deleteDisciplineandinTerm(String id, List<String> disciplines) {
         int i = disciplines.size();
-        while (i>0) {
-            for(String s : disciplines) {
+        while (i > 0) {
+            for (String s : disciplines) {
                 try {
                     //Statement stm = con.createStatement();
                     //deleteDisciplineandinTerm.setString(1,"0");
 
-                    deleteDisciplineandinTerm.setString(1,id);
-                    deleteDisciplineandinTerm.setString(2,s);
+                    deleteDisciplineandinTerm.setString(1, id);
+                    deleteDisciplineandinTerm.setString(2, s);
                     deleteDisciplineandinTerm.execute();
-                   // stm.execute("UPDATE `student_crm`.`term_discipline` SET `id_discipline` = '0' WHERE (`id_term` = '"+id+"' and `id_discipline` = '" + s + "');");
+                    // stm.execute("UPDATE `student_crm`.`term_discipline` SET `id_discipline` = '0' WHERE (`id_term` = '"+id+"' and `id_discipline` = '" + s + "');");
                     // stm.execute("UPDATE `student_crm`.`term_discipline` SET `id_discipline` = '" + s + "' WHERE (`id` = '?');");
                     // stm.execute("INSERT INTO `term_discipline` (`id_term`, `id_discipline`) VALUES ('" + term + "', '" + s + "');");
                     //  INSERT INTO `student_crm`.`term_discipline` (`id_term`, `id_discipline`) VALUES ('3', '4');
@@ -324,14 +324,39 @@ public class DBManager {
                 student.setLastname(rs.getString("last_name"));
                 student.setFirstname(rs.getString("first_name"));
                 student.setGroup(rs.getString("group"));
+                //student.setDate(rs.getString("date"));
+                String date = rs.getString("date");
+                student.setDate(convert(date));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return student;
+    }
+
+    private static String convert(String date) {
+        String year = date.substring(0, 4);
+        String month = date.substring(5, 7);
+        String day = date.substring(8, 10);
+        return day + "/" + month + "/" + year;
+    }
+
+    public static Student getStudentByIdProgress(String id) {
+        Student student = new Student();
+        try {
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("select * from student WHERE status = 1 AND id = " + id);
+            while (rs.next()) {
+                student.setId(rs.getInt("id"));
+                student.setLastname(rs.getString("last_name"));
+                student.setFirstname(rs.getString("first_name"));
+                student.setGroup(rs.getString("group"));
                 student.setDate(rs.getString("date"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return student;
-
-
     }
 
     public static void deleteStudents(String ids) {
@@ -346,27 +371,27 @@ public class DBManager {
 
     public static List<Mark> getMarksbyStudandTerm(String idTerm, String idStudent) {
         LinkedList<Mark> marks = new LinkedList<Mark>();
-  //getMarksbyStudandTerm = con.prepareStatement("SELECT * FROM student_crm.mark\n" +
+        //getMarksbyStudandTerm = con.prepareStatement("SELECT * FROM student_crm.mark\n" +
         //                    "left join student on mark.id_student=student.id\n" +
         //                    "left join term_discipline on mark.id_term_discipline=term_discipline.id\n" +
         //                    "left join term on term_discipline.id_term=term.id\n" +
         //                    "left join discipline on term_discipline.id_discipline = discipline.id\n" +
         //                    "where discipline.status=1 and term.status=1 and student.id=? and term.id=?;");
         try {
-            getMarksbyStudandTerm.setString(1,idStudent);
-            getMarksbyStudandTerm.setString(2,idTerm);
+            getMarksbyStudandTerm.setString(1, idStudent);
+            getMarksbyStudandTerm.setString(2, idTerm);
 
             ResultSet rs = getMarksbyStudandTerm.executeQuery();
             while (rs.next()) {
 
-                    Discipline discipline = new Discipline();
-                    discipline.setId(rs.getInt("id_discipline"));
-                    discipline.setDiscipline(rs.getString("discipline"));
+                Discipline discipline = new Discipline();
+                discipline.setId(rs.getInt("id_discipline"));
+                discipline.setDiscipline(rs.getString("discipline"));
 
-                    Mark mark = new Mark();
-                    mark.setDiscipline(discipline);
-                    mark.setMark(rs.getInt("graduate"));
-                    marks.add(mark);
+                Mark mark = new Mark();
+                mark.setDiscipline(discipline);
+                mark.setMark(rs.getInt("graduate"));
+                marks.add(mark);
             }
 
         } catch (Exception e) {
@@ -374,7 +399,6 @@ public class DBManager {
         }
         return marks;
     }
-
 
 
     //public static List<Term> getTermById(String id){
@@ -404,7 +428,6 @@ public class DBManager {
     }
 
 
-
     public static List<Semestr> getSemestrById() {
         LinkedList<Semestr> semestrs = new LinkedList<Semestr>();
         try {
@@ -426,22 +449,24 @@ public class DBManager {
         return semestrs;
 
     }
+
     public static List<Discipline> getDisceplinesinTerm(String idTerm) {
         LinkedList<Discipline> disinTerm = new LinkedList<Discipline>();
         try {
             Statement stm = con.createStatement();
-           // ResultSet rs = stm.executeQuery("SELECT * FROM student_crm.term_discipline where id_term=" + idTerm + ";");
+            // ResultSet rs = stm.executeQuery("SELECT * FROM student_crm.term_discipline where id_term=" + idTerm + ";");
             ResultSet rs = stm.executeQuery("SELECT * FROM student_crm.term_discipline\n" +
                     "left join discipline on term_discipline.id_discipline=discipline.id\n" +
                     "where id_term=" + idTerm + " and status_dis=1 and status=1;");
 
             while (rs.next()) {
-             Discipline discipline = new Discipline();
-             discipline.setDiscipline(rs.getString("discipline"));
+                Discipline discipline = new Discipline();
+                discipline.setDiscipline(rs.getString("discipline"));
                /* TermDiscipline term = new TermDiscipline();
                 term.setId(rs.getInt("id"));
                 term.setId_term(rs.getString("id_term"));
-                term.setId_discipline(rs.getString("id_discipline"))*/;
+                term.setId_discipline(rs.getString("id_discipline"))*/
+                ;
                 disinTerm.add(discipline);
 
 
@@ -449,7 +474,8 @@ public class DBManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return disinTerm;}
+        return disinTerm;
+    }
 
     public static List<TermDiscipline> getTermDisciplineById() {
         LinkedList<TermDiscipline> termdisciplines = new LinkedList<TermDiscipline>();
@@ -459,7 +485,7 @@ public class DBManager {
 
             while (rs.next()) {
 
-                TermDiscipline termDiscipline =new TermDiscipline();
+                TermDiscipline termDiscipline = new TermDiscipline();
 
 
                 termDiscipline.setId(rs.getInt("id"));
